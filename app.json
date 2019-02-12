@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/homepage/homepage",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#2d8cf0",
+    "navigationBarTitleText": "面团",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f8f8f9",
+    "enablePullDownRefresh": true
+  },
+  "usingComponents": {
+    "i-row": "../../dist/row/index",
+    "i-col": "../../dist/col/index",
+    "i-grid": "../../dist/grid/index",
+    "i-grid-item": "../../dist/grid-item/index",
+    "i-grid-icon": "../../dist/grid-icon/index",
+    "i-grid-label": "../../dist/grid-label/index",
+    "i-tab-bar": "../../dist/tab-bar/index",
+    "i-tab-bar-item": "../../dist/tab-bar-item/index",
+    "i-button": "../../dist/button/index",
+    "i-avatar": "../../dist/avatar/index",
+    "i-icon": "../../dist/icon/index"
+  }
+}
