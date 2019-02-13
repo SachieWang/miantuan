@@ -1,0 +1,24 @@
+/* pages/edit/edit.wxss */
+
+.mycontainer {
+  padding: 7px 15px;
+  color: #495060;
+  position: relative;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  line-height: 1.4;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.qiyu {
+  height: 34.25px;
+}
+
+.title {
+  color: #495060;
+  min-width: 65px;
+  padding-right: 10px;
+  display: block;
+}

@@ -129,7 +129,9 @@ Page({
     console.log("remind")
   },
   edit() {
-    console.log("edit")
+    wx.navigateTo({
+      url: '../edit/edit',
+    })
   },
   company() {
     console.log("company")

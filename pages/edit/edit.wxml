@@ -1,0 +1,112 @@
+<!--pages/edit/edit.wxml-->
+<i-panel title="个人基本信息" hide-top='false' hide-border='false' style="position:relative; top:10px;">
+  <i-input value="{{ value1 }}" title="意向职位" autofocus placeholder="请输入意向职位" />
+  <i-input value="{{ value1 }}" title="姓  名" autofocus placeholder="请输入姓名" />
+  <view class="mycontainer">
+    <view class="title">性 别</view>
+    <i-radio-group current="{{current}}" bindchange="handleXingbieChange">
+      <i-radio wx:for="{{xingbie}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+      </i-radio>
+    </i-radio-group>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">出生日期</view>
+    <picker mode="date" value="{{date}}" start="1960-01-01" end="2010-12-31" bindchange="bindDateChange">
+      <view wx:if="{{!date}}" class="picker" style="color:#808080;">
+        请选择出生年份
+      </view>
+      <view wx:else class="picker">
+        {{date}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">学 历</view>
+    <picker bindchange="bindPickerChange" value="{{index1}}" range="{{xueli}}">
+      <view wx:if="{{index1==-1}}" class="picker" style="color:#808080;">
+        请选择学历
+      </view>
+      <view wx:else class="picker">
+        {{xueli[index1]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">工作经验</view>
+    <picker bindchange="bindGzjyChange" value="{{index2}}" range="{{gzjy}}">
+      <view wx:if="{{index2==-1}}" class="picker" style="color:#808080;">
+        请选择工作经验
+      </view>
+      <view wx:else class="picker">
+        {{gzjy[index2]}}
+      </view>
+    </picker>
+  </view>
+  <i-input value="{{ value3 }}" type="textarea" title="现居住地" placeholder="请输入现居住地(最多50字)" maxlength="50" />
+  <i-input value="{{ value1 }}" title="邮  箱" autofocus placeholder="请输入邮箱" />
+  <i-input value="{{ value2 }}" type="number" title="联系电话" placeholder="请输入手机号" />
+</i-panel>
+<i-panel title="个人详细信息" hide-top='false' hide-border='false' style="position:relative; top:20px;">
+  <view class="mycontainer qiyu">
+    <view class="title">目前状态</view>
+    <picker bindchange="bindMqztChange" value="{{index3}}" range="{{mqzt}}">
+      <view wx:if="{{index3==-1}}" class="picker" style="color:#808080;">
+        请选择目前状态
+      </view>
+      <view wx:else class="picker">
+        {{mqzt[index3]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">工作性质</view>
+    <picker bindchange="bindGzxzChange" value="{{index4}}" range="{{gzxz}}">
+      <view wx:if="{{index4==-1}}" class="picker" style="color:#808080;">
+        请选择工作性质
+      </view>
+      <view wx:else class="picker">
+        {{gzxz[index4]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">期望行业</view>
+    <picker bindchange="bindQwhyChange" value="{{index5}}" range="{{qwhy}}">
+      <view wx:if="{{index5==-1}}" class="picker" style="color:#808080;">
+        请选择期望行业
+      </view>
+      <view wx:else class="picker">
+        {{qwhy[index5]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">期望薪资</view>
+    <picker bindchange="bindQwxzChange" value="{{index6}}" range="{{qwxz}}">
+      <view wx:if="{{index6==-1}}" class="picker" style="color:#808080;">
+        请选择期望薪资
+      </view>
+      <view wx:else class="picker">
+        {{qwxz[index6]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">工作地区</view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view wx:if="{{index7==-1}}" class="picker" style="color:#808080;">
+        请选择工作地区
+      </view>
+      <view wx:else class="picker">
+        {{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker>
+  </view>
+</i-panel>
+<i-panel title="自我介绍及工作经历" hide-top='false' hide-border='false' style="position:relative; top:30px;">
+  <i-input value="{{ value1 }}" type='textarea' autofocus placeholder="请填写自我介绍及工作经历" />
+</i-panel>
+<i-panel title="个人形象" hide-top='false' hide-border='false' style="position:relative; top:40px;">
+
+</i-panel>
+<i-button bind:click="handleClick" type="primary" long='true' style="position:relative; top:100px;">保存简历</i-button>

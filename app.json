@@ -1,9 +1,11 @@
 {
   "pages": [
     "pages/homepage/homepage",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/edit/edit"
   ],
   "window": {
+    "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#2d8cf0",
     "navigationBarTitleText": "面团",
@@ -13,6 +15,7 @@
   "usingComponents": {
     "i-row": "../../dist/row/index",
     "i-col": "../../dist/col/index",
+    "i-panel": "../../dist/panel/index",
     "i-grid": "../../dist/grid/index",
     "i-grid-item": "../../dist/grid-item/index",
     "i-grid-icon": "../../dist/grid-icon/index",
@@ -22,6 +25,9 @@
     "i-tab-bar-item": "../../dist/tab-bar-item/index",
     "i-button": "../../dist/button/index",
     "i-avatar": "../../dist/avatar/index",
-    "i-icon": "../../dist/icon/index"
+    "i-icon": "../../dist/icon/index",
+    "i-input": "../../dist/input/index",
+    "i-radio-group": "../../dist/radio-group/index",
+    "i-radio": "../../dist/radio/index"
   }
 }
