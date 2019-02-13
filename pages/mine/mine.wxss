@@ -43,3 +43,19 @@
   font-weight: 600;
   opacity: 0.95;
 }
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  background-color: #5cadff;
+  border-radius: 25px;
+  position: relative;
+  left: 200px;
+}
+
+.button{
+  
+}

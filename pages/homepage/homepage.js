@@ -77,7 +77,7 @@ Page({
     detail
   }) {
     if (detail.key != this.data.current) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../' + detail.key + '/' + detail.key,
       })
     }

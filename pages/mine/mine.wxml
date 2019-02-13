@@ -1,5 +1,28 @@
 <!--pages/mine/mine.wxml-->
-<i-row i-class="row1">
+<block wx:if="{{!hasUserInfo && canIUse}}">
+  <i-card title="账户余额：￥0" extra="未登录" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <view slot="content">
+      <i-button i-class='text' open-type="getUserInfo" bindgetuserinfo="getUserInfo" type='info' size='small' shape='circle'>登录</i-button>
+    </view>
+    <view slot="footer">
+      <i-button i-class='text' type='info' size='small' shape='circle'>企业中心</i-button>
+      <!--text class='text'>企业中心</text-->
+    </view>
+  </i-card>
+</block>
+<block wx:else>
+  <i-card title="账户余额：￥{{ballery}}" extra="{{userInfo.nickName}}" thumb="{{userInfo.avatarUrl}}">
+    <view slot="content">
+      <i-button i-class='text' type='info' size='small' shape='circle'>简历编辑</i-button>
+      <!--text class='text'>简历编辑</text-->
+    </view>
+    <view slot="footer">
+      <i-button i-class='text' type='info' size='small' shape='circle'>企业中心</i-button>
+    </view>
+  </i-card>
+</block>
+
+<!--i-row i-class="row1">
   <i-col i-class="col-class" span="5" offset="2">
     <i-button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" inline='true'>登录</i-button>
     <i-avatar i-class="img" wx:else src="{{userInfo.avatarUrl}}" size="large" shape="square"></i-avatar>
@@ -7,7 +30,7 @@
   <i-col i-class="nickname" span="14" offset="3">
     <text>{{userInfo.nickName}}</text>
   </i-col>
-</i-row>
+</i-row-->
 <i-row i-class="row2">
   <i-col span="24">
     <i-grid>
@@ -27,7 +50,7 @@
     <i-grid>
       <i-grid-item i-class="grid3">
         <i-grid-icon>
-          <i-icon type="group" size="28" color="#fff"/>
+          <i-icon type="group" size="28" color="#fff" />
         </i-grid-icon>
         <i-grid-label>拼团进度</i-grid-label>
       </i-grid-item>

@@ -11,6 +11,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     current: 'mine',
+    ballery: '1',
     homepagedot: true,
     groupdot: false,
     reminddot: false,
@@ -111,9 +112,13 @@ Page({
     detail
   }) {
     if (detail.key != this.data.current) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../' + detail.key + '/' + detail.key,
       })
+      /*
+            wx.navigateTo({
+              url: '../' + detail.key + '/' + detail.key,
+            })*/
     }
   }
 })
