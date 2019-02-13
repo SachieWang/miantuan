@@ -111,14 +111,27 @@ Page({
   handleChange({
     detail
   }) {
-    if (detail.key != this.data.current) {
+    if (detail.key != this.data.current)
       wx.redirectTo({
         url: '../' + detail.key + '/' + detail.key,
       })
-      /*
-            wx.navigateTo({
-              url: '../' + detail.key + '/' + detail.key,
-            })*/
-    }
-  }
+  },
+  document() {
+    console.log("document")
+  },
+  eit() {
+    console.log("eit")
+  },
+  group() {
+    console.log("group")
+  },
+  remind() {
+    console.log("remind")
+  },
+  edit() {
+    console.log("edit")
+  },
+  company() {
+    console.log("company")
+  },
 })

@@ -8,8 +8,7 @@
     "navigationBarBackgroundColor": "#2d8cf0",
     "navigationBarTitleText": "面团",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f8f8f9",
-    "enablePullDownRefresh": true
+    "backgroundColor": "#f8f8f9"
   },
   "usingComponents": {
     "i-row": "../../dist/row/index",

@@ -5,7 +5,7 @@
       <i-button i-class='text' open-type="getUserInfo" bindgetuserinfo="getUserInfo" type='info' size='small' shape='circle'>登录</i-button>
     </view>
     <view slot="footer">
-      <i-button i-class='text' type='info' size='small' shape='circle'>企业中心</i-button>
+      <i-button i-class='text' type='info' size='small' shape='circle' bindtap="company">企业中心</i-button>
       <!--text class='text'>企业中心</text-->
     </view>
   </i-card>
@@ -13,50 +13,41 @@
 <block wx:else>
   <i-card title="账户余额：￥{{ballery}}" extra="{{userInfo.nickName}}" thumb="{{userInfo.avatarUrl}}">
     <view slot="content">
-      <i-button i-class='text' type='info' size='small' shape='circle'>简历编辑</i-button>
+      <i-button i-class='text' type='info' size='small' shape='circle' bindtap="edit">简历编辑</i-button>
       <!--text class='text'>简历编辑</text-->
     </view>
     <view slot="footer">
-      <i-button i-class='text' type='info' size='small' shape='circle'>企业中心</i-button>
+      <i-button i-class='text' type='info' size='small' shape='circle' bindtap="company">企业中心</i-button>
     </view>
   </i-card>
 </block>
 
-<!--i-row i-class="row1">
-  <i-col i-class="col-class" span="5" offset="2">
-    <i-button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" inline='true'>登录</i-button>
-    <i-avatar i-class="img" wx:else src="{{userInfo.avatarUrl}}" size="large" shape="square"></i-avatar>
-  </i-col>
-  <i-col i-class="nickname" span="14" offset="3">
-    <text>{{userInfo.nickName}}</text>
-  </i-col>
-</i-row-->
 <i-row i-class="row2">
   <i-col span="24">
     <i-grid>
-      <i-grid-item i-class="grid1">
+      <i-grid-item i-class="grid1" bindtap="document">
         <i-grid-icon>
-          <image src="{{userInfo.avatarUrl}}" />
+          <i-icon type="document" size="28" color="#fff" />
         </i-grid-icon>
         <i-grid-label>我的求职</i-grid-label>
       </i-grid-item>
-      <i-grid-item i-class="grid2">
+      <i-grid-item i-class="grid2" bindtap="eit">
         <i-grid-icon>
-          <image src="{{userInfo.avatarUrl}}" />
+          <i-icon type="eit" size="28" color="#fff" />
         </i-grid-icon>
         <i-grid-label>企业邀请</i-grid-label>
       </i-grid-item>
     </i-grid>
     <i-grid>
-      <i-grid-item i-class="grid3">
+      <i-grid-item i-class="grid3" bindtap="group">
         <i-grid-icon>
           <i-icon type="group" size="28" color="#fff" />
         </i-grid-icon>
         <i-grid-label>拼团进度</i-grid-label>
       </i-grid-item>
-      <i-grid-item i-class="grid4">
+      <i-grid-item i-class="grid4" bindtap="remind">
         <i-grid-icon>
-          <image src="{{userInfo.avatarUrl}}" />
+          <i-icon type="remind" size="28" color="#fff" />
         </i-grid-icon>
         <i-grid-label>通知面试</i-grid-label>
       </i-grid-item>
@@ -64,10 +55,7 @@
   </i-col>
 </i-row>
 
-
 <i-tab-bar current="{{ current }}" color="#2b85e4" bindchange="handleChange" fixed='true'>
   <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" count="1" dot="{{homepagedot}}" title=" Home "></i-tab-bar-item>
-  <!--i-tab-bar-item key="group" icon="group " current-icon="group_fill " count="2" dot="{{groupdot}}" title="Friends"></i-tab-bar-item-->
-  <!--i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" count="3" dot="{{reminddot}}" title=" Notice "></i-tab-bar-item-->
   <i-tab-bar-item key="mine" icon="mine " current-icon="mine_fill " count="0" dot="{{minedot}}" title="My "></i-tab-bar-item>
 </i-tab-bar>
