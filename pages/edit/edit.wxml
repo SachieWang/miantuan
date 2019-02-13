@@ -1,5 +1,5 @@
 <!--pages/edit/edit.wxml-->
-<i-panel title="个人基本信息" hide-top='false' hide-border='false' style="position:relative; top:10px;">
+<i-panel title="个人基本信息" hide-border='false' >
   <i-input value="{{ value1 }}" title="意向职位" autofocus placeholder="请输入意向职位" />
   <i-input value="{{ value1 }}" title="姓  名" autofocus placeholder="请输入姓名" />
   <view class="mycontainer">
@@ -46,7 +46,7 @@
   <i-input value="{{ value1 }}" title="邮  箱" autofocus placeholder="请输入邮箱" />
   <i-input value="{{ value2 }}" type="number" title="联系电话" placeholder="请输入手机号" />
 </i-panel>
-<i-panel title="个人详细信息" hide-top='false' hide-border='false' style="position:relative; top:20px;">
+<i-panel title="个人详细信息" hide-border='false' >
   <view class="mycontainer qiyu">
     <view class="title">目前状态</view>
     <picker bindchange="bindMqztChange" value="{{index3}}" range="{{mqzt}}">
@@ -103,10 +103,9 @@
     </picker>
   </view>
 </i-panel>
-<i-panel title="自我介绍及工作经历" hide-top='false' hide-border='false' style="position:relative; top:30px;">
+<i-panel title="自我介绍及工作经历" hide-border='false' >
   <i-input value="{{ value1 }}" type='textarea' autofocus placeholder="请填写自我介绍及工作经历" />
 </i-panel>
-<i-panel title="个人形象" hide-top='false' hide-border='false' style="position:relative; top:40px;">
-
+<i-panel title="个人形象" hide-border='false' >
 </i-panel>
-<i-button bind:click="handleClick" type="primary" long='true' style="position:relative; top:100px;">保存简历</i-button>
+<i-button bind:click="handleClick" type="primary" long='true' style="position:relative; top:50px;">保存简历</i-button>
