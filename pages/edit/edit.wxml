@@ -1,7 +1,7 @@
 <!--pages/edit/edit.wxml-->
 <i-panel title="个人基本信息" hide-border='false' >
   <i-input value="{{ value1 }}" title="意向职位" autofocus placeholder="请输入意向职位" />
-  <i-input value="{{ value1 }}" title="姓  名" autofocus placeholder="请输入姓名" />
+  <i-input value="{{ value1 }}" title="姓  名" placeholder="请输入姓名" />
   <view class="mycontainer">
     <view class="title">性 别</view>
     <i-radio-group current="{{current}}" bindchange="handleXingbieChange">
@@ -43,7 +43,7 @@
     </picker>
   </view>
   <i-input value="{{ value3 }}" type="textarea" title="现居住地" placeholder="请输入现居住地(最多50字)" maxlength="50" />
-  <i-input value="{{ value1 }}" title="邮  箱" autofocus placeholder="请输入邮箱" />
+  <i-input value="{{ value1 }}" title="邮  箱" placeholder="请输入邮箱" />
   <i-input value="{{ value2 }}" type="number" title="联系电话" placeholder="请输入手机号" />
 </i-panel>
 <i-panel title="个人详细信息" hide-border='false' >
@@ -104,7 +104,7 @@
   </view>
 </i-panel>
 <i-panel title="自我介绍及工作经历" hide-border='false' >
-  <i-input value="{{ value1 }}" type='textarea' autofocus placeholder="请填写自我介绍及工作经历" />
+  <i-input value="{{ value1 }}" type='textarea' placeholder="请填写自我介绍及工作经历" />
 </i-panel>
 <i-panel title="个人形象" hide-border='false' >
 </i-panel>
