@@ -11,10 +11,10 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     current: 'homepage',
-    homepagedot: true,
-    groupdot: false,
-    reminddot: false,
+    homepagedot: false,
+    homepagecount: 0,
     minedot: true,
+    minecount: 0,
     imgUrls: [
       'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png',
       'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png',
@@ -86,5 +86,10 @@ Page({
         url: '../' + detail.key + '/' + detail.key,
       })
     }
+  },
+  handleEdit() {
+    wx.navigateTo({
+      url: '../edit/edit',
+    })
   },
 })

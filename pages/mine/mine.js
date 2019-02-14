@@ -12,10 +12,10 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     current: 'mine',
     ballery: '1',
-    homepagedot: true,
-    groupdot: false,
-    reminddot: false,
+    homepagedot: false,
+    homepagecount: 0,
     minedot: true,
+    minecount: 0,
   },
 
   /**

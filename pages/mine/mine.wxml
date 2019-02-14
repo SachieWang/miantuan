@@ -56,6 +56,6 @@
 </i-row>
 
 <i-tab-bar current="{{ current }}" color="#2b85e4" bindchange="handleChange" fixed='true'>
-  <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" count="1" dot="{{homepagedot}}" title=" Home "></i-tab-bar-item>
-  <i-tab-bar-item key="mine" icon="mine " current-icon="mine_fill " count="0" dot="{{minedot}}" title="My "></i-tab-bar-item>
+  <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" count="{{homepagecount}}" dot="{{homepagedot}}" title=" Home "></i-tab-bar-item>
+  <i-tab-bar-item key="mine" icon="mine " current-icon="mine_fill " count="{{minecount}}" dot="{{minedot}}" title="My "></i-tab-bar-item>
 </i-tab-bar>
