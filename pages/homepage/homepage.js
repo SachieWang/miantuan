@@ -15,6 +15,11 @@ Page({
     groupdot: false,
     reminddot: false,
     minedot: true,
+    imgUrls: [
+      'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png',
+      'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png',
+      'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png'
+    ],
   },
 
   /**
