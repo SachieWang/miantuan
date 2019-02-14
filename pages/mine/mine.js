@@ -16,6 +16,7 @@ Page({
     homepagecount: 0,
     minedot: true,
     minecount: 0,
+    logs: 0,
   },
 
   /**
@@ -106,6 +107,14 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+    if (this.data.logs == 0) {
+      // 展示本地存储能力
+      console.log("logging")
+      var logs = {}
+      logs = app.globalData
+      wx.setStorageSync('logs', logs)
+      this.data.logs = 1
+    }
   },
 
   handleChange({

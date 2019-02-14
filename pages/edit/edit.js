@@ -1,4 +1,7 @@
 // pages/edit/edit.js
+var Bmob = require('../../src/lib/app.js');
+Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
+
 const app = getApp()
 
 Page({
@@ -32,6 +35,14 @@ Page({
     region: ['广东省', '广州市', '海珠区'],
     customItem: '全部',
     index7: -1,
+    myimg: "https://i.loli.net/2017/08/21/599a521472424.jpg",
+    resume: {},
+    value1: '',
+    value2: '',
+    value7: '',
+    value8: '',
+    value9: '',
+    value15: '',
   },
 
   /**
@@ -148,5 +159,78 @@ Page({
       region: e.detail.value,
       index7: 0
     })
+  },
+  bindSelectimg() {
+    var that = this
+    //上传照片
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        var tempFilePaths = res.tempFilePaths
+        var file;
+        for (let item of tempFilePaths) {
+          var name = item.split(".")[2]
+          var suffix = item.split(".")[3]
+          file = Bmob.File(name + '.' + suffix, item);
+        }
+        file.save().then(res => {
+          console.log(res.length);
+          console.log(res);
+          that.setData({
+            myimg: res[0].url
+          })
+        })
+      }
+    })
+  },
+  handleSubmit() {
+    var log = wx.getStorageSync('logs')
+    //console.log(log)
+
+    //生成简历对象体
+    this.data.resume.v1 = this.data.value1
+    this.data.resume.v2 = this.data.value1
+    this.data.resume.v3 = this.data.current
+    this.data.resume.v4 = this.data.date
+    this.data.resume.v5 = this.data.xueli[this.data.index1]
+    this.data.resume.v6 = this.data.gzjy[this.data.index2]
+    this.data.resume.v7 = this.data.value7
+    this.data.resume.v8 = this.data.value8
+    this.data.resume.v9 = this.data.value9
+    this.data.resume.v10 = this.data.mqzt[this.data.index3]
+    this.data.resume.v11 = this.data.gzxz[this.data.index4]
+    this.data.resume.v12 = this.data.qwhy[this.data.index5]
+    this.data.resume.v13 = this.data.qwxz[this.data.index6]
+    this.data.resume.v14 = this.data.region[0] + ',' + this.data.region[1] + ',' + this.data.region[2]
+    this.data.resume.v15 = this.data.value15
+    this.data.resume.v16 = this.data.myimg
+    //console.log(this.data.resume)
+
+    //非已有，存入
+    var query = Bmob.Query('resume');
+    query.equalTo("UserID", "==", log.userInfo.nickName)
+    query.find().then(res => {
+      //console.log(res.length)
+      if (res.length == 0) {
+        query.set("UserID", log.userInfo.nickName)
+        query.set("content", this.data.resume)
+        query.save().then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      } else {
+        //console.log(res[0].objectId)
+        query.get(res[0].objectId).then(res => {
+          console.log(res)
+          res.set('content', this.data.resume)
+          res.save()
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    });
   }
 })

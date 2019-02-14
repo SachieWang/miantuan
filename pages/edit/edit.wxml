@@ -1,7 +1,7 @@
 <!--pages/edit/edit.wxml-->
-<i-panel title="个人基本信息" hide-border='false' >
+<i-panel title="个人基本信息" hide-border='false'>
   <i-input value="{{ value1 }}" title="意向职位" autofocus placeholder="请输入意向职位" />
-  <i-input value="{{ value1 }}" title="姓  名" placeholder="请输入姓名" />
+  <i-input value="{{ value2 }}" title="姓  名" placeholder="请输入姓名" />
   <view class="mycontainer">
     <view class="title">性 别</view>
     <i-radio-group current="{{current}}" bindchange="handleXingbieChange">
@@ -42,11 +42,11 @@
       </view>
     </picker>
   </view>
-  <i-input value="{{ value3 }}" type="textarea" title="现居住地" placeholder="请输入现居住地(最多50字)" maxlength="50" />
-  <i-input value="{{ value1 }}" title="邮  箱" placeholder="请输入邮箱" />
-  <i-input value="{{ value2 }}" type="number" title="联系电话" placeholder="请输入手机号" />
+  <i-input value="{{ value7 }}" type="textarea" title="现居住地" placeholder="请输入现居住地(最多50字)" maxlength="50" />
+  <i-input value="{{ value8 }}" title="邮  箱" placeholder="请输入邮箱" />
+  <i-input value="{{ value9 }}" type="number" title="联系电话" placeholder="请输入手机号" />
 </i-panel>
-<i-panel title="个人详细信息" hide-border='false' >
+<i-panel title="个人详细信息" hide-border='false'>
   <view class="mycontainer qiyu">
     <view class="title">目前状态</view>
     <picker bindchange="bindMqztChange" value="{{index3}}" range="{{mqzt}}">
@@ -103,9 +103,11 @@
     </picker>
   </view>
 </i-panel>
-<i-panel title="自我介绍及工作经历" hide-border='false' >
-  <i-input value="{{ value1 }}" type='textarea' placeholder="请填写自我介绍及工作经历" />
+<i-panel title="自我介绍及工作经历" hide-border='false'>
+  <i-input value="{{ value15 }}" type='textarea' placeholder="请填写自我介绍及工作经历" />
 </i-panel>
-<i-panel title="个人形象" hide-border='false' >
+<i-panel title="个人形象" hide-border='false'>
+  <image bindtap='bindSelectimg' src='{{myimg}}' style='position:relative; left:10vw; width:80vw;'>
+  </image>
 </i-panel>
-<i-button bind:click="handleClick" type="primary" long='true' style="position:relative; top:50px;">保存简历</i-button>
+<i-button bind:click="handleSubmit" type="primary" long='true' style="position:relative; top:50px;">保存简历</i-button>
