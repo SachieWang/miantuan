@@ -1,6 +1,6 @@
 <!--pages/edit/edit.wxml-->
 <i-panel title="个人基本信息" hide-border='false'>
-  <i-input id="value1" bind:change="handleValueChange" value="{{ value1 }}" title="意向职位" autofocus placeholder="请输入意向职位" />
+  <i-input id="value1" bind:change="handleValueChange" value="{{ value1 }}" title="意向职位" placeholder="请输入意向职位" />
   <i-input id="value2" bind:change="handleValueChange" value="{{ value2 }}" title="姓  名" placeholder="请输入姓名" />
   <view class="mycontainer">
     <view class="title">性 别</view>
