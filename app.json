@@ -29,6 +29,7 @@
     "i-input": "../../dist/input/index",
     "i-radio-group": "../../dist/radio-group/index",
     "i-radio": "../../dist/radio/index",
-    "i-divider": "../../dist/divider/index"
+    "i-divider": "../../dist/divider/index",
+    "i-toast": "../../dist/toast/index"
   }
 }

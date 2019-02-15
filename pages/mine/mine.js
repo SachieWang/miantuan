@@ -1,4 +1,7 @@
 // pages/mine/mine.js
+var Bmob = require('../../src/lib/app.js');
+Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
+
 const app = getApp()
 
 Page({
@@ -11,12 +14,12 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     current: 'mine',
-    ballery: '1',
+    ballery: '1', //余额
     homepagedot: false,
     homepagecount: 0,
     minedot: true,
     minecount: 0,
-    logs: 0,
+    //logs: 0,
   },
 
   /**
@@ -101,20 +104,31 @@ Page({
   },
 
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    if (this.data.logs == 0) {
-      // 展示本地存储能力
-      console.log("logging")
-      var logs = {}
-      logs = app.globalData
-      wx.setStorageSync('logs', logs)
-      this.data.logs = 1
-    }
+    // 展示本地存储能力
+    var status = wx.getStorageSync('status') || {}
+    status = app.globalData
+    wx.setStorageSync('status', status)
+    //判断是否为系统新用户
+    var query = Bmob.Query("individual")
+    query.equalTo("UserID", "==", status.userInfo.nickName)
+    query.find().then(res => {
+      if (res.length == 0) {
+        //新个人用户,则注册信息
+        query.set("UserID", status.userInfo.nickName)
+        query.set("haveResume", false)
+        query.set("openInfo", false)
+        query.save().then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
+      }
+    })
   },
 
   handleChange({

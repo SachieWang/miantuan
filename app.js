@@ -1,4 +1,6 @@
 //app.js
+var Bmob = require('./src/lib/app.js');
+Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
 
 App({
   onLaunch: function() {
@@ -6,8 +8,9 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        //console.log(res)
       }
-    })
+    });
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -23,15 +26,15 @@ App({
                 this.userInfoReadyCallback(res)
               }
               // 展示本地存储能力
-              /*
-              var logs = wx.getStorageSync('logs') || {}
-              logs = this.globalData
-              wx.setStorageSync('logs', logs)*/
+              var status = wx.getStorageSync('status') || {}
+              status = this.globalData
+              wx.setStorageSync('status', status)
             }
           })
         }
       }
-    })
+    });
+    //判断是否为平台用户，是否加载信息
 
   },
   globalData: {

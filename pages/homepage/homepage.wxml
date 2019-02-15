@@ -12,25 +12,25 @@
 </i-row>
 <i-row style="position:relative; top:30rpx;">
   <i-col span="4" offset="1">
-    <view class='options op1'>
+    <view class='options op1' bindtap="handleZgz">
       <i-icon type="businesscard_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">找工作</text>
     </view>
   </i-col>
   <i-col span="4" offset="2">
-    <view class='options op2'>
+    <view class='options op2' bindtap="handleZrc">
       <i-icon type="addressbook_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">招人才</text>
     </view>
   </i-col>
   <i-col span="4" offset="2">
-    <view class='options op3'>
+    <view class='options op3' bindtap="handleZph">
       <i-icon type="interactive_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">招聘会</text>
     </view>
   </i-col>
   <i-col span="4" offset="2">
-    <view class='options op4'>
+    <view class='options op4' bindtap="handleZczx">
       <i-icon type="dynamic_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">职场资讯</text>
     </view>
@@ -38,25 +38,25 @@
 </i-row>
 <i-row style="position:relative; top:60rpx;">
   <i-col span="4" offset="1">
-    <view class='options op5' bindtap="handleEdit">
+    <view class='options op5' bindtap="handleFbjl">
       <i-icon type="activity_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">发布简历</text>
     </view>
   </i-col>
   <i-col span="4" offset="2">
-    <view class='options op6'>
+    <view class='options op6' bindtap="handleWdsc">
       <i-icon type="collection_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">我的收藏</text>
     </view>
   </i-col>
   <i-col span="4" offset="2">
-    <view class='options op7'>
+    <view class='options op7' bindtap="handleMstz">
       <i-icon type="flag_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">面试通知</text>
     </view>
   </i-col>
   <i-col span="4" offset="2">
-    <view class='options op8'>
+    <view class='options op8' bindtap="handleQydl">
       <i-icon type="tasklist_fill" size="50" color='#fff' />
       <text style="font-size:24rpx;">企业登陆</text>
     </view>
@@ -67,8 +67,9 @@
 <i-divider content="最新人才" style="position:relative; top:120rpx;"></i-divider>
 <i-divider content="最新职位" style="position:relative; top:150rpx;"></i-divider>
 
-
 <i-tab-bar current="{{ current }}" color="#2b85e4" bindchange="handleChange" fixed='true'>
   <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" count="{{homepagecount}}" dot="{{homepagedot}}" title=" Home "></i-tab-bar-item>
   <i-tab-bar-item key="mine" icon="mine " current-icon="mine_fill " count="{{minecount}}" dot="{{minedot}}" title="My "></i-tab-bar-item>
 </i-tab-bar>
+
+<i-toast id="toast" />

@@ -1,8 +1,10 @@
 // pages/main/main.js
 const app = getApp()
+const {
+  $Toast
+} = require('../../dist/base/index');
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -87,9 +89,46 @@ Page({
       })
     }
   },
-  handleEdit() {
-    wx.navigateTo({
-      url: '../edit/edit',
-    })
+  handleZgz() {
+    console.log("zgz")
+    console.log(app.globalData)
   },
+  handleZrc() {
+    console.log("zrc")
+  },
+  handleZph() {
+    console.log("zph")
+  },
+  handleZczx() {
+    console.log("zczx")
+  },
+  handleFbjl() {
+    if (!app.globalData.userInfo) {
+      $Toast({
+        content: '未登录',
+        type: 'warning',
+        duration: 0,
+      });
+      setTimeout(() => {
+        wx.redirectTo({
+          url: '../mine/mine',
+        })
+        $Toast.hide();
+      }, 500);
+    } else {
+      wx.navigateTo({
+        url: '../edit/edit',
+      })
+    }
+  },
+  handleWdsc() {
+    console.log("wdsc")
+  },
+  handleMstz() {
+    console.log("mstz")
+  },
+  handleQydl() {
+    console.log("qydl")
+  },
+
 })
