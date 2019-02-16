@@ -1,5 +1,7 @@
 // pages/comenter/comenter.js
-const { $Toast } = require('../../dist/base/index');
+const {
+  $Toast
+} = require('../../dist/base/index');
 Page({
 
   /**
@@ -94,7 +96,7 @@ Page({
   },
   handleSignup() {
     console.log("signup")
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../signup/signup',
     })
   },
