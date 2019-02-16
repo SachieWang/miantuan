@@ -1,0 +1,27 @@
+/* pages/company/company.wxss */
+
+.panel {
+  position: relative;
+  left: 4vw;
+  width: 92vw;
+  height: 21vh;
+  border-radius: 25px;
+}
+
+.p1 {
+  background-color: aquamarine;
+  top: 2vh;
+}
+
+.p2 {
+  background-color: aquamarine;
+  top: 6vh;
+}
+.p3{
+background-color: aquamarine;
+  top: 10vh;
+}
+.p4{
+background-color: aquamarine;
+  top: 14vh;
+}

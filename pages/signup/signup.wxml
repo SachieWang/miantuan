@@ -1,0 +1,49 @@
+<!--pages/signup/signup.wxml-->
+<i-panel title="企业注册" hide-border='false'>
+  <view class="mycontainer qiyu">
+    <view class="title">区 域</view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view wx:if="{{index1==-1}}" class="picker" style="color:#808080;">
+        请选择地区
+      </view>
+      <view wx:else class="picker">
+        {{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker>
+  </view>
+  <i-input id="value1" bind:change="handleValueChange" value="{{ value1 }}" title="企业名称" placeholder="请输入企业名称" />
+  <i-input id="value2" bind:change="handleValueChange" value="{{ value2 }}" title="企业行业" placeholder="请输入企业行业" />
+  <i-input id="value3" bind:change="handleValueChange" value="{{ value3 }}" title="企业性质" placeholder="请输入企业性质" />
+  <i-input id="value4" bind:change="handleValueChange" value="{{ value4 }}" title="人员规模" placeholder="请输入人员规模" />
+  <i-input id="value5" bind:change="handleValueChange" value="{{ value5 }}" title="负责人" placeholder="请输入负责人" />
+  <i-input id="value6" bind:change="handleValueChange" value="{{ value6 }}" title="电 话" placeholder="请输入电话" />
+  <view class="mycontainer qiyu">
+    <view class="title">地 址</view>
+    <view>
+      <!--view wx:if="{{!dizhi}}" class="picker" style="color:#808080;"-->
+      <view class="picker" style="color:#808080;">
+        <i-input id="dizhi" bind:change="handleValueChange" value="{{ dizhi }}" placeholder="请输入地址" style='position:relative; left:-15px;' />
+        <i-button bind:click="handleGetregion" type="ghost" shape="circle" size="small" inline="true"> 获取位置 </i-button>
+      </view>
+      <!--view wx:else class="picker">
+        {{dizhi}}
+      </view-->
+    </view>
+  </view>
+  <i-input id="value7" bind:change="handleValueChange" value="{{ value7 }}" title="登陆账号" placeholder="请输入登陆账号" />
+  <i-input id="value8" bind:change="handleValueChange" value="{{ value8 }}" title="密 码" placeholder="请输入登陆密码" />
+  <i-input id="value9" bind:change="handleValueChange" value="{{ value9 }}" title="确认密码" placeholder="请再次输入密码" />
+</i-panel>
+<i-panel title="公司介绍" hide-border='false'>
+  <i-input id="value10" bind:change="handleValueChange" value="{{ value10 }}" type='textarea' placeholder="请填写公司介绍" />
+</i-panel>
+<i-panel title="企业LOGO" hide-border='false'>
+  <image bindtap='bindSelectimg' src='{{logoimg}}' style='position:relative; left:10vw; width:80vw;'>
+  </image>
+</i-panel>
+<i-panel title="企业执照或相关证件" hide-border='false'>
+  <image bindtap='bindSelectimg' src='{{infoimg}}' style='position:relative; left:10vw; width:80vw;'>
+  </image>
+</i-panel>
+
+<i-button bind:click="handleSignup" type="primary" long='true' style="position:relative; top:50px;">注册企业信息</i-button>

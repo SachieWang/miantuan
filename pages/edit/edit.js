@@ -174,6 +174,9 @@ Page({
 
   },
 
+  /**
+   * 性别picker事件
+   */
   handleXingbieChange({
     detail = {}
   }) {
@@ -182,6 +185,9 @@ Page({
     });
   },
 
+  /**
+   * 改变日期
+   */
   bindDateChange(e) {
     //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -189,7 +195,10 @@ Page({
     })
   },
 
-  bindPickerChange(e) {
+  /**
+   * 改变学历
+   */
+  bindXueliChange(e) {
     //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index1: e.detail.value
@@ -239,6 +248,9 @@ Page({
     })
   },
 
+  /**
+   * 上传照片
+   */
   bindSelectimg() {
     var that = this
     //上传照片
@@ -263,6 +275,9 @@ Page({
     })
   },
 
+  /**
+   * 保存简历
+   */
   handleSubmit() {
     var that = this
     var status = wx.getStorageSync('status')
@@ -329,6 +344,9 @@ Page({
     });
   },
 
+  /**
+   * 更新简历
+   */
   handleGx() {
     //生成简历对象体
     this.data.resume.v1 = this.data.value1
@@ -372,6 +390,9 @@ Page({
     console.log("发布简历")
   },
 
+  /**
+   * 监听反馈输入框值改动
+   */
   handleValueChange(e) {
     if (e.currentTarget.id == "value1") {
       this.data.value1 = e.detail.detail.value

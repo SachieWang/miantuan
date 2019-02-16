@@ -2,7 +2,10 @@
   "pages": [
     "pages/homepage/homepage",
     "pages/mine/mine",
-    "pages/edit/edit"
+    "pages/edit/edit",
+    "pages/company/company",
+    "pages/comenter/comenter",
+    "pages/signup/signup"
   ],
   "window": {
     "enablePullDownRefresh": true,

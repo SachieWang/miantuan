@@ -127,8 +127,25 @@ Page({
   handleMstz() {
     console.log("mstz")
   },
-  handleQydl() {
-    console.log("qydl")
+  handleFbzw() {
+    console.log("fbzw")
+    if (!app.globalData.comLogin) {
+      $Toast({
+        content: '未登录企业账号',
+        type: 'warning',
+        duration: 0,
+      });
+      setTimeout(() => {
+        wx.redirectTo({
+          url: '../comenter/comenter',
+        })
+        $Toast.hide();
+      }, 500);
+    } else {
+      wx.navigateTo({
+        url: '../edit/edit',
+      })
+    }
   },
 
 })

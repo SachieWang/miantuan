@@ -22,7 +22,7 @@
   </view>
   <view class="mycontainer qiyu">
     <view class="title">学 历</view>
-    <picker bindchange="bindPickerChange" value="{{index1}}" range="{{xueli}}">
+    <picker bindchange="bindXueliChange" value="{{index1}}" range="{{xueli}}">
       <view wx:if="{{index1==-1}}" class="picker" style="color:#808080;">
         请选择学历
       </view>

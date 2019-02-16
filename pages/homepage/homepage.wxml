@@ -56,9 +56,9 @@
     </view>
   </i-col>
   <i-col span="4" offset="2">
-    <view class='options op8' bindtap="handleQydl">
+    <view class='options op8' bindtap="handleFbzw">
       <i-icon type="tasklist_fill" size="50" color='#fff' />
-      <text style="font-size:24rpx;">企业登陆</text>
+      <text style="font-size:24rpx;">发布职位</text>
     </view>
   </i-col>
 </i-row>
