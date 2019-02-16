@@ -136,7 +136,7 @@ Page({
         duration: 0,
       });
       setTimeout(() => {
-        wx.redirectTo({
+        wx.navigateTo({
           url: '../comenter/comenter',
         })
         $Toast.hide();
