@@ -1,7 +1,11 @@
 // pages/comenter/comenter.js
+var Bmob = require('../../src/lib/app.js');
+Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
 const {
   $Toast
 } = require('../../dist/base/index');
+
+const app = getApp()
 Page({
 
   /**
@@ -15,13 +19,36 @@ Page({
     ],
     value1: '',
     value2: '',
+    value3: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var that = this
+    var name = wx.getStorageSync("status").userInfo.nickName
+    //查询是否已注册
+    var query = Bmob.Query("company");
+    query.equalTo("UserID", "==", name)
+    query.find().then(res => {
+      console.log(res)
+      if (res.length == 0) {
+        console.log("test")
+        $Toast({
+          content: '您尚未注册企业账号',
+          type: 'warning',
+          duration: 0,
+        });
+        setTimeout(() => {
+          $Toast.hide();
+        }, 300);
+      } else {
+        that.setData({
+          value1: res[0].username
+        })
+      }
+    })
   },
 
   /**
@@ -35,7 +62,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    var that = this
+    var name = wx.getStorageSync("status").userInfo.nickName
+    //查询是否已注册
+    var query = Bmob.Query("company");
+    query.equalTo("UserID", "==", name)
+    query.find().then(res => {
+      console.log(res)
+      if (res.length == 0) {
+        console.log("test")
+        $Toast({
+          content: '您尚未注册企业账号',
+          type: 'warning',
+          duration: 0,
+        });
+        setTimeout(() => {
+          $Toast.hide();
+        }, 300);
+      } else {
+        that.setData({
+          value1: res[0].username
+        })
+      }
+    })
   },
 
   /**
@@ -73,6 +122,9 @@ Page({
 
   },
 
+  /**
+   * 输入框数值改变
+   */
   handleValueChange(e) {
     if (e.currentTarget.id == "value1") {
       this.data.value1 = e.detail.detail.value
@@ -80,24 +132,65 @@ Page({
       this.data.value2 = e.detail.detail.value
     }
   },
+
+  /**
+   * 登陆
+   */
   handleLogin() {
     console.log("login")
-    $Toast({
-      content: '登陆成功',
-      type: 'success',
-      duration: 0,
-    });
-    setTimeout(() => {
-      wx.redirectTo({
-        url: '../company/company',
-      })
-      $Toast.hide();
-    }, 300);
+    var that = this
+    var name = wx.getStorageSync("status").userInfo.nickName
+    //查询密码
+    var query = Bmob.Query("company");
+    query.equalTo("username", "==", that.data.value1)
+    query.find().then(res => {
+      console.log(res)
+      if (that.data.value2 == res[0].password) {
+        app.globalData.comLogin = true
+        $Toast({
+          content: '登陆成功',
+          type: 'success',
+          duration: 0,
+        });
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1,
+          })
+          $Toast.hide();
+        }, 300);
+      }else{
+        $Toast({
+          content: '密码错误',
+          type: 'error',
+          duration: 0,
+        });
+        setTimeout(() => {
+          $Toast.hide();
+        }, 300);
+      }
+    })
+
   },
+
+  /**
+   * 注册
+   */
   handleSignup() {
     console.log("signup")
     wx.navigateTo({
       url: '../signup/signup',
     })
   },
+
+  /**
+   * 监听反馈输入框值改动
+   */
+  handleValueChange(e) {
+    console.log("test")
+    if (e.currentTarget.id == "value1") {
+      this.data.value1 = e.detail.detail.value
+    } else if (e.currentTarget.id == "value2") {
+      this.data.value2 = e.detail.detail.value
+    }
+  }
 })

@@ -30,4 +30,5 @@
   font-size: 12px;
   border-bottom-style: solid;
   border-bottom-width: 1px;
+  color: #808080;
 }

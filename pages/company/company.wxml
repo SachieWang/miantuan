@@ -1,5 +1,6 @@
 <!--pages/company/company.wxml-->
-<view class='panel p1'>
+<view class='panel p1' bindtap='handleinfoadmin'>
+企业信息管理
 </view>
 <view class='panel p2'>
 </view>

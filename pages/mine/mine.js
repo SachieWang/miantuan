@@ -1,6 +1,9 @@
 // pages/mine/mine.js
 var Bmob = require('../../src/lib/app.js');
 Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
+const {
+  $Toast
+} = require('../../dist/base/index');
 
 const app = getApp()
 
@@ -103,7 +106,14 @@ Page({
 
   },
 
+  /**
+   * 获取用户信息
+   */
   getUserInfo: function(e) {
+    if (!e.detail.userInfo) {
+      console.log("获取失败")
+      return false
+    }
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -158,5 +168,31 @@ Page({
   },
   company() {
     console.log("company")
+    if (!app.globalData.userInfo) {
+      $Toast({
+        content: '请先登陆平台个人账号',
+        type: 'warning',
+        duration: 0,
+      });
+      setTimeout(() => {
+        $Toast.hide();
+      }, 500);
+    } else if (!app.globalData.comLogin) {
+      $Toast({
+        content: '未登录企业账号',
+        type: 'warning',
+        duration: 0,
+      });
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '../comenter/comenter',
+        })
+        $Toast.hide();
+      }, 500);
+    } else {
+      wx.navigateTo({
+        url: '../company/company',
+      })
+    }
   },
 })

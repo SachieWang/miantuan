@@ -1,0 +1,147 @@
+<!--pages/edit/edit.wxml-->
+<i-panel title="招聘职位添加" hide-border='false'>
+  <i-input id="value1" bind:change="handleValueChange" value="{{ value1 }}" title="工作职位" placeholder="请输入发布职位" />
+  <view class="mycontainer qiyu">
+    <view class="title">工作类型</view>
+    <picker bindchange="bindQwhyChange" value="{{index5}}" range="{{qwhy}}">
+      <view wx:if="{{index5==-1}}" class="picker" style="color:#808080;">
+        请选择相关行业
+      </view>
+      <view wx:else class="picker">
+        {{qwhy[index5]}}
+      </view>
+    </picker>
+  </view>
+  <i-input id="value2" bind:change="handleValueChange" value="{{ value2 }}" title="悬赏奖金" placeholder="请输入悬赏奖金" />
+  <i-input id="value3" bind:change="handleValueChange" value="{{ value3 }}" title="猎头奖金" placeholder="请输入猎头奖金" />
+  <i-input id="value4" bind:change="handleValueChange" value="{{ value4 }}" title="薪资待遇" placeholder="请输入薪资待遇" />
+  <i-input id="value5" bind:change="handleValueChange" value="{{ value5 }}" title="招聘人数" placeholder="请输入招聘人数" />
+  <view class="mycontainer qiyu">
+    <view class="title">学历要求</view>
+    <picker bindchange="bindXueliChange" value="{{index1}}" range="{{xueli}}">
+      <view wx:if="{{index1==-1}}" class="picker" style="color:#808080;">
+        请选择学历要求
+      </view>
+      <view wx:else class="picker">
+        {{xueli[index1]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">工作经验</view>
+    <picker bindchange="bindGzjyChange" value="{{index2}}" range="{{gzjy}}">
+      <view wx:if="{{index2==-1}}" class="picker" style="color:#808080;">
+        请选择工作经验
+      </view>
+      <view wx:else class="picker">
+        {{gzjy[index2]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">工作性质</view>
+    <picker bindchange="bindGzxzChange" value="{{index4}}" range="{{gzxz}}">
+      <view wx:if="{{index4==-1}}" class="picker" style="color:#808080;">
+        请选择工作性质
+      </view>
+      <view wx:else class="picker">
+        {{gzxz[index4]}}
+      </view>
+    </picker>
+  </view>
+  <i-input id="value6" bind:change="handleValueChange" value="{{ value6 }}" title="年龄要求" placeholder="请输入年龄要求" />
+  <view class="mycontainer">
+    <view class="title">性 别</view>
+    <i-radio-group current="{{current}}" bindchange="handleXingbieChange">
+      <i-radio wx:for="{{xingbie}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+      </i-radio>
+    </i-radio-group>
+  </view>
+  <!--view class="mycontainer qiyu">
+    <view class="title">出生日期</view>
+    <picker mode="date" value="{{date}}" start="1960-01-01" end="2010-12-31" bindchange="bindDateChange">
+      <view wx:if="{{!date}}" class="picker" style="color:#808080;">
+        请选择出生年份
+      </view>
+      <view wx:else class="picker">
+        {{date}}
+      </view>
+    </picker>
+  </view>
+  <i-input id="value7" bind:change="handleValueChange" value="{{ value7 }}" type="textarea" title="现居住地" placeholder="请输入现居住地(最多50字)" maxlength="50" />
+  <i-input id="value8" bind:change="handleValueChange" value="{{ value8 }}" title="邮  箱" placeholder="请输入邮箱" />
+  <i-input id="value9" bind:change="handleValueChange" value="{{ value9 }}" type="number" title="联系电话" placeholder="请输入手机号" /-->
+</i-panel>
+
+<i-panel title="特色服务" hide-border='false'>
+  <i-row>
+    <i-col span="8">
+      <i-checkbox-group current="{{currentchecks1}}" bindchange="handleLine1Change">
+        <i-checkbox wx:for="{{line1}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+        </i-checkbox>
+      </i-checkbox-group>
+    </i-col>
+    <i-col span="8">
+      <i-checkbox-group current="{{currentchecks2}}" bindchange="handleLine2Change">
+        <i-checkbox wx:for="{{line2}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+        </i-checkbox>
+      </i-checkbox-group>
+    </i-col>
+    <i-col span="8">
+      <i-checkbox-group current="{{currentchecks3}}" bindchange="handleLine3Change">
+        <i-checkbox wx:for="{{line3}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+        </i-checkbox>
+      </i-checkbox-group>
+    </i-col>
+  </i-row>
+
+  <!--view class="mycontainer qiyu">
+    <view class="title">目前状态</view>
+    <picker bindchange="bindMqztChange" value="{{index3}}" range="{{mqzt}}">
+      <view wx:if="{{index3==-1}}" class="picker" style="color:#808080;">
+        请选择目前状态
+      </view>
+      <view wx:else class="picker">
+        {{mqzt[index3]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">期望薪资</view>
+    <picker bindchange="bindQwxzChange" value="{{index6}}" range="{{qwxz}}">
+      <view wx:if="{{index6==-1}}" class="picker" style="color:#808080;">
+        请选择期望薪资
+      </view>
+      <view wx:else class="picker">
+        {{qwxz[index6]}}
+      </view>
+    </picker>
+  </view>
+  <view class="mycontainer qiyu">
+    <view class="title">工作地区</view>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view wx:if="{{index7==-1}}" class="picker" style="color:#808080;">
+        请选择工作地区
+      </view>
+      <view wx:else class="picker">
+        {{region[0]}}，{{region[1]}}，{{region[2]}}
+      </view>
+    </picker>
+  </view-->
+</i-panel>
+
+<i-panel title="职位详情" hide-border='false'>
+  <i-input id="value7" bind:change="handleValueChange" value="{{ value7 }}" type='textarea' placeholder="请填写职位详情" />
+</i-panel>
+<!--i-panel title="个人形象" hide-border='false'>
+  <image bindtap='bindSelectimg' src='{{myimg}}' style='position:relative; left:10vw; width:80vw;'>
+  </image>
+</i-panel-->
+
+<i-button wx:if="{{!haveResume}}" bind:click="handleSubmit" type="primary" long='true' style="position:relative; top:50px;">发布职位</i-button>
+<block wx:else>
+  <i-button bind:click="handleGx" type="success" long='true' style="position:relative; top:50px;">更新简历</i-button>
+  <i-button bind:click="handleFb" type="primary" long='true' style="position:relative; top:50px;">发布职位</i-button>
+</block>
+
+<i-toast id="toast" />

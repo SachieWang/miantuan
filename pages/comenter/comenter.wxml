@@ -11,10 +11,12 @@
   </i-col>
 </i-row>
 <i-input i-class="inputbox" id="value1" bind:change="handleValueChange" value="{{ value1 }}" title="账  号" placeholder="请输入账号" />
-<i-input i-class="inputbox" id="value2" bind:change="handleValueChange" value="{{ value2 }}" title="密  码" placeholder="请输入密码" />
+<i-input i-class="inputbox" id="value2" type='password' bind:change="handleValueChange" value="{{ value2 }}" title="密  码" placeholder="请输入密码" />
 
-<i-button i-class='button' type='primary' size='large' shape='circle' bind:click="handleLogin" >登陆</i-button>
+<i-button i-class='button' type='primary' size='large' shape='circle' bind:click="handleLogin">登陆</i-button>
 <!--i-button i-class='button' type='primary' size='large' shape='circle' bind:click="handleSignup" >注册</i-button-->
-<view class="tip" bindtap="handleSignup"> <text class='text'>尚未拥有企业账号，前往注册</text> </view>
+<view class="tip" bindtap="handleSignup">
+  <text class='text'>尚未拥有企业账号，前往注册</text>
+</view>
 
 <i-toast id="toast" />

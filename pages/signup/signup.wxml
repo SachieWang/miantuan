@@ -14,7 +14,7 @@
   <i-input id="value1" bind:change="handleValueChange" value="{{ value1 }}" title="企业名称" placeholder="请输入企业名称" />
   <i-input id="value2" bind:change="handleValueChange" value="{{ value2 }}" title="企业行业" placeholder="请输入企业行业" />
   <i-input id="value3" bind:change="handleValueChange" value="{{ value3 }}" title="企业性质" placeholder="请输入企业性质" />
-  <i-input id="value4" bind:change="handleValueChange" value="{{ value4 }}" title="人员规模" placeholder="请输入人员规模" />
+  <i-input id="value4" bind:change="handleValueChange" value="{{ value4 }}" type='number' title="人员规模" placeholder="请输入人员规模" />
   <i-input id="value5" bind:change="handleValueChange" value="{{ value5 }}" title="负责人" placeholder="请输入负责人" />
   <i-input id="value6" bind:change="handleValueChange" value="{{ value6 }}" title="电 话" placeholder="请输入电话" />
   <view class="mycontainer qiyu">
@@ -31,8 +31,14 @@
     </view>
   </view>
   <i-input id="value7" bind:change="handleValueChange" value="{{ value7 }}" title="登陆账号" placeholder="请输入登陆账号" />
-  <i-input id="value8" bind:change="handleValueChange" value="{{ value8 }}" title="密 码" placeholder="请输入登陆密码" />
-  <i-input id="value9" bind:change="handleValueChange" value="{{ value9 }}" title="确认密码" placeholder="请再次输入密码" />
+  <block wx:if="{{!comsignup}}">
+    <i-input id="value8" type='password' bind:change="handleValueChange" value="{{ value8 }}" title="密 码" placeholder="请输入登陆密码" />
+    <i-input id="value9" type='password' bind:change="handleValueChange" bind:blur="handleBlur" value="{{ value9 }}" title="确认密码" placeholder="请再次输入密码" />
+  </block>
+  <block wx:else>
+    <i-input id="value8" type='password' bind:change="handleValueChange" value="{{ value8 }}" title="更换密码" placeholder="请输入登陆密码" />
+    <i-input id="value9" type='password' bind:change="handleValueChange" bind:blur="handleBlur" value="{{ value9 }}" title="确认密码" placeholder="请再次输入密码" />
+  </block>
 </i-panel>
 <i-panel title="公司介绍" hide-border='false'>
   <i-input id="value10" bind:change="handleValueChange" value="{{ value10 }}" type='textarea' placeholder="请填写公司介绍" />
@@ -46,4 +52,6 @@
   </image>
 </i-panel>
 
-<i-button bind:click="handleSignup" type="primary" long='true' style="position:relative; top:50px;">注册企业信息</i-button>
+<i-button wx:if="{{!comsignup}}" bind:click="handleSignup" type="primary" long='true' style="position:relative; top:50px;">注册企业信息</i-button>
+<i-button wx:else bind:click="handleSignup" type="success" long='true' style="position:relative; top:50px;">更新企业信息</i-button>
+<i-toast id="toast" />

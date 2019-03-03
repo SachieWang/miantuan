@@ -5,7 +5,8 @@
     "pages/edit/edit",
     "pages/company/company",
     "pages/comenter/comenter",
-    "pages/signup/signup"
+    "pages/signup/signup",
+    "pages/zhiwei/zhiwei"
   ],
   "window": {
     "enablePullDownRefresh": true,
@@ -33,6 +34,13 @@
     "i-radio-group": "../../dist/radio-group/index",
     "i-radio": "../../dist/radio/index",
     "i-divider": "../../dist/divider/index",
-    "i-toast": "../../dist/toast/index"
+    "i-toast": "../../dist/toast/index",
+    "i-checkbox-group": "../../dist/checkbox-group/index",
+    "i-checkbox": "../../dist/checkbox/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   }
 }

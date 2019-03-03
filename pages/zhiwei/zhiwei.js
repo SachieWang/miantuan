@@ -1,6 +1,10 @@
 // pages/edit/edit.js
 var Bmob = require('../../src/lib/app.js');
 Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
+const {
+  $Toast
+} = require('../../dist/base/index');
+
 
 const app = getApp()
 
@@ -10,47 +14,85 @@ Page({
    * 页面的初始数据
    */
   data: {
+    value1: '',
+    value2: '',
+    value3: '',
+    value4: '',
+    value5: '',
+    value6: '',
+    value7: '',
+    qwhy: ['外贸', '服务员', '人事专员', '室内设计', '行政专员', '平面设计', '前台', '会计', '司机', '文员', '客服', '导购员', '仓管', '网页设计', '网络编辑', '文案策划', '机械设计', '模具设计', '普工', '采购', '质检员', '保安', '操作工'],
+    index5: -1,
     xueli: ['初中', '高中', '中技', '中专', '大专', '本科', '硕士', '博士', '博后'],
     index1: -1,
     gzjy: ['无经验', '1年以下', '1-3年', '3-5年', '5-10年', '10年以上'],
     index2: -1,
-    mqzt: ['我目前已离职,可快速到岗', '我目前在职,但考虑换个环境', '观望,有好的机会在考虑', '目前暂无跳槽打算', '应届毕业生'],
-    index3: -1,
     gzxz: ['全职', '兼职', '实习'],
     index4: -1,
-    qwhy: ['外贸', '服务员', '人事专员', '室内设计', '行政专员', '平面设计', '前台', '会计', '司机', '文员', '客服', '导购员', '仓管', '网页设计', '网络编辑', '文案策划', '机械设计', '模具设计', '普工', '采购', '质检员', '保安', '操作工'],
-    index5: -1,
-    qwxz: ['1千~2千/月', '2千~3千/月', '3千~4千/月', '4千~5千/月', '5千~1万/月', '1万以上/月'],
-    index6: -1,
     xingbie: [{
       id: 1,
       name: '男',
     }, {
       id: 2,
       name: '女'
+    }, {
+      id: 3,
+      name: '不限'
     }],
-    current: '男',
+    current: '',
     position: 'left',
-    date: '',
-    region: ['', '广州市', '海珠区'],
-    customItem: '全部',
-    index7: -1,
-    myimg: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-    resume: {},
-    value1: '',
-    value2: '',
-    value7: '',
-    value8: '',
-    value9: '',
-    value15: '',
-    haveResume: '',
+    line1: [{
+      id: 1,
+      name: '五险一金',
+    }, {
+      id: 2,
+      name: '交通补贴'
+    }, {
+      id: 3,
+      name: '年终奖金'
+    }, {
+      id: 4,
+      name: '双休',
+    }],
+    line2: [{
+      id: 5,
+      name: '医疗保险',
+    }, {
+      id: 6,
+      name: '餐饮补贴'
+    }, {
+      id: 7,
+      name: '定期体检'
+    }, {
+      id: 8,
+      name: '调休',
+    }],
+    line3: [{
+      id: 9,
+      name: '员工旅游',
+    }, {
+      id: 2,
+      name: '出国机会'
+    }, {
+      id: 3,
+      name: '节日福利'
+    }, {
+      id: 4,
+      name: '年假',
+    }],
+    currentchecks1: [],
+    currentchecks2: [],
+    currentchecks3: [],
+    currentchecks: [],
     optskey: {},
+    haveResume: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    /*
     var that = this
     var name = wx.getStorageSync("status").userInfo.nickName
     //查询是否已有简历
@@ -88,7 +130,7 @@ Page({
           myimg: res[0].R_image,
         })
       }
-    });
+    });*/
   },
 
   /**
@@ -102,6 +144,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    /*
     var that = this
     var name = wx.getStorageSync("status").userInfo.nickName
     //查询是否已有简历
@@ -138,7 +181,7 @@ Page({
           myimg: res[0].R_image,
         })
       }
-    });
+    });*/
   },
 
   /**
@@ -188,16 +231,6 @@ Page({
   },
 
   /**
-   * 改变日期
-   */
-  bindDateChange(e) {
-    //console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date: e.detail.value
-    })
-  },
-
-  /**
    * 改变学历
    */
   bindXueliChange(e) {
@@ -211,13 +244,6 @@ Page({
     //console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index2: e.detail.value
-    })
-  },
-
-  bindMqztChange(e) {
-    //console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index3: e.detail.value
     })
   },
 
@@ -235,103 +261,80 @@ Page({
     })
   },
 
-  bindQwxzChange(e) {
-    //console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index6: e.detail.value
-    })
-  },
-
-  bindRegionChange(e) {
-    //console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value,
-      index7: 0
-    })
-  },
-
   /**
-   * 上传照片
-   */
-  bindSelectimg() {
-    var that = this
-    //上传照片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success(res) {
-        var tempFilePaths = res.tempFilePaths
-        var file;
-        for (let item of tempFilePaths) {
-          var name = item.split(".")[2]
-          var suffix = item.split(".")[3]
-          file = Bmob.File(name + '.' + suffix, item);
-        }
-        file.save().then(res => {
-          that.setData({
-            myimg: res[0].url
-          })
-        })
-      }
-    })
-  },
-
-  /**
-   * 保存简历
+   * 发布职位
    */
   handleSubmit() {
     var that = this
     var status = wx.getStorageSync('status')
     //生成选项键对象体
-    this.data.optskey.v5id = this.data.index1
-    this.data.optskey.v6id = this.data.index2
-    this.data.optskey.v10id = this.data.index3
-    this.data.optskey.v11id = this.data.index4
-    this.data.optskey.v12id = this.data.index5
-    this.data.optskey.v13id = this.data.index6
+    this.data.optskey.xlyq = this.data.index1
+    this.data.optskey.gzjy = this.data.index2
+    this.data.optskey.gzxz = this.data.index4
+    this.data.optskey.gzlx = this.data.index5
+    this.data.currentchecks = this.data.currentchecks1.concat(this.data.currentchecks2, this.data.currentchecks3)
     //判断是否已有简历
-    var query = Bmob.Query('individual');
-    query.equalTo("UserID", "==", status.userInfo.nickName)
-    query.find().then(res => {
-      if (!res[0].haveResume) {
-        //非已有则存入
-        query.set("R_intention", that.data.value1)
-        query.set("R_name", that.data.value2)
-        query.set("R_gender", that.data.current)
-        query.set("R_birth", that.data.date)
-        query.set("R_edu", that.data.xueli[that.data.index1])
-        query.set("R_exp", that.data.gzjy[that.data.index2])
-        query.set("R_residence", that.data.value7)
-        query.set("R_email", that.data.value8)
-        query.set("R_tellphone", that.data.value9)
-        query.set("R_status", that.data.mqzt[that.data.index3])
-        query.set("R_quality", that.data.gzxz[that.data.index4])
-        query.set("R_industry", that.data.qwhy[that.data.index5])
-        query.set("R_salary", that.data.qwxz[that.data.index6])
-        query.set("R_region", that.data.region[0] + ',' + that.data.region[1] + ',' + that.data.region[2])
-        query.set("R_content", that.data.value15)
-        query.set("R_image", that.data.myimg)
-        query.set("R_optskey", that.data.optskey)
-        query.save().then(res => {
-          that.setData({
-            haveResume: true,
-          })
-          query = Bmob.Query('individual')
-          query.equalTo("UserID", "==", status.userInfo.nickName)
-          query.find().then(res => {
-            query.get(res[0].objectId).then(res => {
-              res.set('haveResume', true)
-              res.save()
-            }).catch(err => {
-              console.log(err)
-            })
-          })
+    var query = Bmob.Query('zhiwei');
+    //query.equalTo("UserID", "==", status.userInfo.nickName)
+    //query.find().then(res => {
+    //if (!res[0].haveResume) {
+    //非已有则存入
+    query.set("UserID", status.userInfo.nickName)
+    query.set("Z_gzzw", that.data.value1)
+    query.set("Z_gzlx", that.data.qwhy[that.data.index5])
+    query.set("Z_xsjj", that.data.value2)
+    query.set("Z_ltjj", that.data.value3)
+    query.set("Z_xzdy", that.data.value4)
+    query.set("Z_zprs", that.data.value5)
+    query.set("Z_xlyq", that.data.xueli[that.data.index1])
+    query.set("Z_gzjy", that.data.gzjy[that.data.index2])
+    query.set("Z_gzxz", that.data.gzxz[that.data.index4])
+    query.set("Z_nlyq", that.data.value6)
+    query.set("Z_gender", that.data.current)
+    query.set("Z_tsfw", that.data.currentchecks)
+    query.set("Z_zwxq", that.data.value7)
+    query.set("Z_optskey", that.data.optskey)
+    query.save().then(res => {
+      $Toast({
+        content: '成功发布',
+        type: 'success',
+        duration: 0,
+      });
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1
+        })
+        $Toast.hide();
+      }, 1000);
+      /*that.setData({
+        haveResume: true,
+      })
+      query = Bmob.Query('individual')
+      query.equalTo("UserID", "==", status.userInfo.nickName)
+      query.find().then(res => {
+        query.get(res[0].objectId).then(res => {
+          res.set('haveResume', true)
+          res.save()
         }).catch(err => {
           console.log(err)
         })
-      }
-    });
+      })*/
+    }).catch(err => {
+      console.log(err)
+    })
+    //  }
+    /*
+    else {
+      //已有则更新内容
+      query.get(res[0].objectId).then(res => {
+        console.log(res)
+        res.set('content', this.data.resume)
+        res.save()
+      }).catch(err => {
+        console.log(err)
+      })
+    }*/
+    //});
   },
 
   /**
@@ -389,14 +392,44 @@ Page({
       this.data.value1 = e.detail.detail.value
     } else if (e.currentTarget.id == "value2") {
       this.data.value2 = e.detail.detail.value
+    } else if (e.currentTarget.id == "value3") {
+      this.data.value3 = e.detail.detail.value
+    } else if (e.currentTarget.id == "value4") {
+      this.data.value4 = e.detail.detail.value
+    } else if (e.currentTarget.id == "value5") {
+      this.data.value5 = e.detail.detail.value
+    } else if (e.currentTarget.id == "value6") {
+      this.data.value6 = e.detail.detail.value
     } else if (e.currentTarget.id == "value7") {
       this.data.value7 = e.detail.detail.value
-    } else if (e.currentTarget.id == "value8") {
-      this.data.value8 = e.detail.detail.value
-    } else if (e.currentTarget.id == "value9") {
-      this.data.value9 = e.detail.detail.value
-    } else if (e.currentTarget.id == "value15") {
-      this.data.value15 = e.detail.detail.value
     }
-  }
+  },
+
+  handleLine1Change({
+    detail = {}
+  }) {
+    const index = this.data.currentchecks1.indexOf(detail.value);
+    index === -1 ? this.data.currentchecks1.push(detail.value) : this.data.currentchecks1.splice(index, 1);
+    this.setData({
+      currentchecks1: this.data.currentchecks1
+    });
+  },
+  handleLine2Change({
+    detail = {}
+  }) {
+    const index = this.data.currentchecks2.indexOf(detail.value);
+    index === -1 ? this.data.currentchecks2.push(detail.value) : this.data.currentchecks2.splice(index, 1);
+    this.setData({
+      currentchecks2: this.data.currentchecks2
+    });
+  },
+  handleLine3Change({
+    detail = {}
+  }) {
+    const index = this.data.currentchecks3.indexOf(detail.value);
+    index === -1 ? this.data.currentchecks3.push(detail.value) : this.data.currentchecks3.splice(index, 1);
+    this.setData({
+      currentchecks3: this.data.currentchecks3
+    });
+  },
 })

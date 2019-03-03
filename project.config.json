@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": 0,
@@ -78,6 +78,13 @@
 					"id": -1,
 					"name": "signup",
 					"pathName": "pages/signup/signup",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "zhiwei",
+					"pathName": "pages/zhiwei/zhiwei",
 					"scene": null
 				}
 			]

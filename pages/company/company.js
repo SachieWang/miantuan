@@ -62,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  handleinfoadmin(){
+    wx.navigateTo({
+      url: '../signup/signup',
+    })
   }
 })

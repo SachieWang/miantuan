@@ -129,7 +129,19 @@ Page({
   },
   handleFbzw() {
     console.log("fbzw")
-    if (!app.globalData.comLogin) {
+    if (!app.globalData.userInfo) {
+      $Toast({
+        content: '未登录',
+        type: 'warning',
+        duration: 0,
+      });
+      setTimeout(() => {
+        wx.redirectTo({
+          url: '../mine/mine',
+        })
+        $Toast.hide();
+      }, 500);
+    } else if (!app.globalData.comLogin) {
       $Toast({
         content: '未登录企业账号',
         type: 'warning',
@@ -143,7 +155,7 @@ Page({
       }, 500);
     } else {
       wx.navigateTo({
-        url: '../edit/edit',
+        url: '../zhiwei/zhiwei',
       })
     }
   },
