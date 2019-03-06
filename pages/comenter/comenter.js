@@ -26,6 +26,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    //console.log(options)
+    this.setData({
+      url: options.path
+    })
     var that = this
     var name = wx.getStorageSync("status").userInfo.nickName
     //查询是否已注册
@@ -153,12 +157,12 @@ Page({
           duration: 0,
         });
         setTimeout(() => {
-          wx.navigateBack({
-            delta: 1,
+          wx.redirectTo({
+            url: that.data.url,
           })
           $Toast.hide();
         }, 300);
-      }else{
+      } else {
         $Toast({
           content: '密码错误',
           type: 'error',

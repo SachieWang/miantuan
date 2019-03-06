@@ -6,7 +6,9 @@
     "pages/company/company",
     "pages/comenter/comenter",
     "pages/signup/signup",
-    "pages/zhiwei/zhiwei"
+    "pages/zhiwei/zhiwei",
+    "pages/comlist/comlist",
+    "pages/canlist/canlist"
   ],
   "window": {
     "enablePullDownRefresh": true,
@@ -14,7 +16,8 @@
     "navigationBarBackgroundColor": "#2d8cf0",
     "navigationBarTitleText": "面团",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f8f8f9"
+    "backgroundColor": "#f8f8f9",
+    "onReachBottomDistance": 5
   },
   "usingComponents": {
     "i-row": "../../dist/row/index",
@@ -36,11 +39,28 @@
     "i-divider": "../../dist/divider/index",
     "i-toast": "../../dist/toast/index",
     "i-checkbox-group": "../../dist/checkbox-group/index",
-    "i-checkbox": "../../dist/checkbox/index"
+    "i-checkbox": "../../dist/checkbox/index",
+    "i-load-more": "../../dist/load-more/index"
   },
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/homepage/homepage",
+        "text": "Home",
+        "iconPath": "/icon/hp.png",
+        "selectedIconPath": "/icon/hhpp.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "My",
+        "iconPath": "/icon/my.png",
+        "selectedIconPath": "/icon/mmyy.png"
+      }
+    ]
   }
 }

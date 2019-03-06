@@ -1,4 +1,7 @@
 // pages/main/main.js
+var Bmob = require('../../src/lib/app.js');
+Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
+
 const app = getApp()
 const {
   $Toast
@@ -9,6 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    tip: "下拉加载",
+    loading: false,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -28,7 +33,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var that = this
+    var query = Bmob.Query("zhiwei");
+    query.find().then(res => {
+      //console.log(res)
+      that.data.list = res //生成初list
+      //数据完备，重渲染
+      that.setData({
+        list: that.data.list
+      })
+      if (that.data.list.length < 5) {
+        that.setData({
+          tip: "已无更多"
+        })
+      }
+    });
   },
 
   /**
@@ -91,7 +110,9 @@ Page({
   },
   handleZgz() {
     console.log("zgz")
-    console.log(app.globalData)
+    wx.navigateTo({
+      url: '../comlist/comlist',
+    })
   },
   handleZrc() {
     console.log("zrc")
@@ -149,7 +170,7 @@ Page({
       });
       setTimeout(() => {
         wx.navigateTo({
-          url: '../comenter/comenter',
+          url: '../comenter/comenter?path=../zhiwei/zhiwei',
         })
         $Toast.hide();
       }, 500);

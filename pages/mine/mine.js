@@ -185,7 +185,7 @@ Page({
       });
       setTimeout(() => {
         wx.navigateTo({
-          url: '../comenter/comenter',
+          url: '../comenter/comenter?path=../company/company',
         })
         $Toast.hide();
       }, 500);

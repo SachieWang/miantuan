@@ -86,51 +86,19 @@ Page({
     currentchecks: [],
     optskey: {},
     haveResume: false,
+    logourl: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    /*
-    var that = this
-    var name = wx.getStorageSync("status").userInfo.nickName
-    //查询是否已有简历
-    var query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name)
+    var status = wx.getStorageSync('status')
+    var query = Bmob.Query('company');
+    query.equalTo("UserID", "==", status.userInfo.nickName)
     query.find().then(res => {
-      that.setData({
-        haveResume: res[0].haveResume
-      })
+      this.data.logourl = res[0].logo
     })
-    //加载简历内容
-    query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name);
-    query.find().then(res => {
-      console.log(res)
-      if (res.length == 1) {
-        var reglist = [res[0].R_region.split(",")[0], res[0].R_region.split(",")[1], res[0].R_region.split(",")[2]]
-        that.setData({
-          value1: res[0].R_intention,
-          value2: res[0].R_name,
-          current: res[0].R_gender,
-          date: res[0].R_birth,
-          index1: res[0].R_optskey.v5id,
-          index2: res[0].R_optskey.v6id,
-          value7: res[0].R_residence,
-          value8: res[0].R_email,
-          value9: res[0].R_tellphone,
-          index3: res[0].R_optskey.v10id,
-          index4: res[0].R_optskey.v11id,
-          index5: res[0].R_optskey.v12id,
-          index6: res[0].R_optskey.v13id,
-          index7: 0,
-          region: [].concat(reglist),
-          value15: res[0].R_content,
-          myimg: res[0].R_image,
-        })
-      }
-    });*/
   },
 
   /**
@@ -144,44 +112,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    /*
-    var that = this
-    var name = wx.getStorageSync("status").userInfo.nickName
-    //查询是否已有简历
-    var query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name)
-    query.find().then(res => {
-      that.setData({
-        haveResume: res[0].haveResume
-      })
-    })
-    //加载简历内容
-    query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name);
-    query.find().then(res => {
-      if (res.length == 1) {
-        var reglist = [res[0].R_region.split(",")[0], res[0].R_region.split(",")[1], res[0].R_region.split(",")[2]]
-        that.setData({
-          value1: res[0].R_intention,
-          value2: res[0].R_name,
-          current: res[0].R_gender,
-          date: res[0].R_birth,
-          index1: res[0].R_optskey.v5id,
-          index2: res[0].R_optskey.v6id,
-          value7: res[0].R_residence,
-          value8: res[0].R_email,
-          value9: res[0].R_tellphone,
-          index3: res[0].R_optskey.v10id,
-          index4: res[0].R_optskey.v11id,
-          index5: res[0].R_optskey.v12id,
-          index6: res[0].R_optskey.v13id,
-          index7: 0,
-          region: [].concat(reglist),
-          value15: res[0].R_content,
-          myimg: res[0].R_image,
-        })
-      }
-    });*/
+
   },
 
   /**
@@ -265,8 +196,20 @@ Page({
    * 发布职位
    */
   handleSubmit() {
+    if (this.data.index1 == -1 || this.data.index2 == -1 || this.data.index4 == -1 || this.data.index5 == -1) {
+      $Toast({
+        content: '发布失败，请确认填写无误',
+        type: 'warning',
+        duration: 0,
+      });
+      setTimeout(() => {
+        $Toast.hide();
+      }, 1000);
+      return false
+    }
     var that = this
     var status = wx.getStorageSync('status')
+    console.log("zhongduan")
     //生成选项键对象体
     this.data.optskey.xlyq = this.data.index1
     this.data.optskey.gzjy = this.data.index2
@@ -275,9 +218,6 @@ Page({
     this.data.currentchecks = this.data.currentchecks1.concat(this.data.currentchecks2, this.data.currentchecks3)
     //判断是否已有简历
     var query = Bmob.Query('zhiwei');
-    //query.equalTo("UserID", "==", status.userInfo.nickName)
-    //query.find().then(res => {
-    //if (!res[0].haveResume) {
     //非已有则存入
     query.set("UserID", status.userInfo.nickName)
     query.set("Z_gzzw", that.data.value1)
@@ -294,6 +234,7 @@ Page({
     query.set("Z_tsfw", that.data.currentchecks)
     query.set("Z_zwxq", that.data.value7)
     query.set("Z_optskey", that.data.optskey)
+    query.set("Z_logourl", that.data.logourl)
     query.save().then(res => {
       $Toast({
         content: '成功发布',
@@ -306,35 +247,10 @@ Page({
         })
         $Toast.hide();
       }, 1000);
-      /*that.setData({
-        haveResume: true,
-      })
-      query = Bmob.Query('individual')
-      query.equalTo("UserID", "==", status.userInfo.nickName)
-      query.find().then(res => {
-        query.get(res[0].objectId).then(res => {
-          res.set('haveResume', true)
-          res.save()
-        }).catch(err => {
-          console.log(err)
-        })
-      })*/
     }).catch(err => {
       console.log(err)
+      console.log("shibai")
     })
-    //  }
-    /*
-    else {
-      //已有则更新内容
-      query.get(res[0].objectId).then(res => {
-        console.log(res)
-        res.set('content', this.data.resume)
-        res.save()
-      }).catch(err => {
-        console.log(err)
-      })
-    }*/
-    //});
   },
 
   /**
