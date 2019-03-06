@@ -90,14 +90,11 @@ Page({
   },
 
   onReachBottom: function() {
-    if (this.data.test.length <= 20) {
-      var num = this.data.test.length
+    if (this.data.list.length <= 20) {
+      var num = this.data.list.length
       for (var i = 0; i < 5; i++) {
-        num = this.data.test.length
-        this.data.test = this.data.test.concat([{
-          content: num + 1,
-          num: "num" + num + 1
-        }])
+        num = this.data.list.length
+        this.data.list = this.data.list.concat(this.data.list)
       }
       this.setData({
         tip: "加载中",
@@ -111,14 +108,14 @@ Page({
       setTimeout(() => {
         $Toast.hide();
         this.setData({
-          test: this.data.test,
+          list: this.data.list,
           tip: "下拉加载",
           loading: false,
         })
       }, 500);
     } else {
       this.setData({
-        test: this.data.test,
+        list: this.data.list,
         tip: "已无更多",
         loading: false,
       })

@@ -131,7 +131,7 @@ Page({
         duration: 0,
       });
       setTimeout(() => {
-        wx.redirectTo({
+        wx.switchTab({
           url: '../mine/mine',
         })
         $Toast.hide();
@@ -157,7 +157,7 @@ Page({
         duration: 0,
       });
       setTimeout(() => {
-        wx.redirectTo({
+        wx.switchTab({
           url: '../mine/mine',
         })
         $Toast.hide();
