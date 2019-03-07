@@ -52,10 +52,10 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-    var name = wx.getStorageSync("status").userInfo.nickName
+    var openid = wx.getStorageSync('openid')
     //查询是否已有简历
     var query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name)
+    query.equalTo("openid", "==", openid)
     query.find().then(res => {
       that.setData({
         haveResume: res[0].haveResume
@@ -63,7 +63,7 @@ Page({
     })
     //加载简历内容
     query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name);
+    query.equalTo("openid", "==", openid);
     query.find().then(res => {
       console.log(res)
       if (res.length == 1) {
@@ -103,10 +103,10 @@ Page({
    */
   onShow: function() {
     var that = this
-    var name = wx.getStorageSync("status").userInfo.nickName
+    var openid = wx.getStorageSync('openid')
     //查询是否已有简历
     var query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name)
+    query.equalTo("openid", "==", openid)
     query.find().then(res => {
       that.setData({
         haveResume: res[0].haveResume
@@ -114,7 +114,7 @@ Page({
     })
     //加载简历内容
     query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name);
+    query.equalTo("openid", "==", openid);
     query.find().then(res => {
       if (res.length == 1) {
         var reglist = [res[0].R_region.split(",")[0], res[0].R_region.split(",")[1], res[0].R_region.split(",")[2]]
@@ -282,7 +282,7 @@ Page({
    */
   handleSubmit() {
     var that = this
-    var status = wx.getStorageSync('status')
+    var openid = wx.getStorageSync('openid')
     //生成选项键对象体
     this.data.optskey.v5id = this.data.index1
     this.data.optskey.v6id = this.data.index2
@@ -292,7 +292,7 @@ Page({
     this.data.optskey.v13id = this.data.index6
     //判断是否已有简历
     var query = Bmob.Query('individual');
-    query.equalTo("UserID", "==", status.userInfo.nickName)
+    query.equalTo("openid", "==", openid)
     query.find().then(res => {
       if (!res[0].haveResume) {
         //非已有则存入
@@ -318,7 +318,7 @@ Page({
             haveResume: true,
           })
           query = Bmob.Query('individual')
-          query.equalTo("UserID", "==", status.userInfo.nickName)
+          query.equalTo("openid", "==", openid)
           query.find().then(res => {
             query.get(res[0].objectId).then(res => {
               res.set('haveResume', true)
@@ -348,8 +348,8 @@ Page({
     this.data.optskey.v13id = this.data.index6
     //更新表
     var query = Bmob.Query('individual');
-    var status = wx.getStorageSync('status')
-    query.equalTo("UserID", "==", status.userInfo.nickName)
+    var openid = wx.getStorageSync('openid')
+    query.equalTo("openid", "==", openid)
     query.find().then(res => {
       query.get(res[0].objectId).then(res => {
         res.set("R_intention", that.data.value1)

@@ -8,7 +8,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        //console.log(res)
+        this.globalData.code = res.code
       }
     });
     // 获取用户信息
@@ -29,6 +29,11 @@ App({
               var status = wx.getStorageSync('status') || {}
               status = this.globalData
               wx.setStorageSync('status', status)
+              //获取openid
+              var code = wx.getStorageSync('status').code
+              Bmob.User.requestOpenId(code).then(value => {
+                wx.setStorageSync('openid', value.openid)
+              })
             }
           })
         }
@@ -39,6 +44,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    comLogin:false,
+    comLogin: false,
+    code: ''
   }
 })

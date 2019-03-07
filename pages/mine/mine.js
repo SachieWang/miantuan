@@ -119,26 +119,41 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    // 展示本地存储能力
+    // 存储用户基本信息
     var status = wx.getStorageSync('status') || {}
     status = app.globalData
     wx.setStorageSync('status', status)
-    //判断是否为系统新用户
-    var query = Bmob.Query("individual")
-    query.equalTo("UserID", "==", status.userInfo.nickName)
-    query.find().then(res => {
-      if (res.length == 0) {
-        //新个人用户,则注册信息
-        query.set("UserID", status.userInfo.nickName)
-        query.set("haveResume", false)
-        query.set("openInfo", false)
-        query.save().then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-      }
+    //获取openid
+    var code = wx.getStorageSync('status').code
+    Bmob.User.requestOpenId(code).then(value => {
+      wx.setStorageSync('openid', value.openid)
     })
+    $Toast({
+      content: '登陆中',
+      type: 'loading',
+      duration: 0,
+    });
+    setTimeout(() => {
+      $Toast.hide();
+      //判断是否为系统新用户
+      var openid = wx.getStorageSync('openid')
+      var query = Bmob.Query("individual")
+      query.equalTo("openid", "==", openid)
+      query.find().then(res => {
+        if (res.length == 0) {
+          //新个人用户,则注册信息
+          query.set("UserID", status.userInfo.nickName)
+          query.set("openid", openid)
+          query.set("haveResume", false)
+          query.set("openInfo", false)
+          query.save().then(res => {
+            console.log(res)
+          }).catch(err => {
+            console.log(err)
+          })
+        }
+      })
+    }, 3000);
   },
 
   handleChange({
