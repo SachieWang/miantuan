@@ -44,6 +44,7 @@ Page({
     value9: '',
     value15: '',
     haveResume: '',
+    openInfo: '',
     optskey: {},
   },
 
@@ -53,12 +54,13 @@ Page({
   onLoad: function(options) {
     var that = this
     var openid = wx.getStorageSync('openid')
-    //查询是否已有简历
+    //查询是否已有简历且开放
     var query = Bmob.Query("individual");
     query.equalTo("openid", "==", openid)
     query.find().then(res => {
       that.setData({
-        haveResume: res[0].haveResume
+        haveResume: res[0].haveResume,
+        openInfo: res[0].openInfo
       })
     })
     //加载简历内容
@@ -379,6 +381,40 @@ Page({
 
   handleFb() {
     console.log("发布简历")
+    var query = Bmob.Query('individual');
+    var openid = wx.getStorageSync('openid')
+    var that = this
+    that.setData({
+      openInfo: true
+    })
+    query.equalTo("openid", "==", openid)
+    query.find().then(res => {
+      query.get(res[0].objectId).then(res => {
+        res.set("openInfo", that.data.openInfo)
+        res.save()
+      }).catch(err => {
+        console.log(err)
+      })
+    })
+  },
+
+  handleCh() {
+    console.log("撤回简历")
+    var query = Bmob.Query('individual');
+    var openid = wx.getStorageSync('openid')
+    var that = this
+    that.setData({
+      openInfo: false
+    })
+    query.equalTo("openid", "==", openid)
+    query.find().then(res => {
+      query.get(res[0].objectId).then(res => {
+        res.set("openInfo", that.data.openInfo)
+        res.save()
+      }).catch(err => {
+        console.log(err)
+      })
+    })
   },
 
   /**

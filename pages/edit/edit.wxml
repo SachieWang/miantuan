@@ -114,5 +114,6 @@
 <i-button wx:if="{{!haveResume}}" bind:click="handleSubmit" type="primary" long='true' style="position:relative; top:50px;">保存简历</i-button>
 <block wx:else>
   <i-button bind:click="handleGx" type="success" long='true' style="position:relative; top:50px;">更新简历</i-button>
-  <i-button bind:click="handleFb" type="primary" long='true' style="position:relative; top:50px;">发布简历</i-button>
+  <i-button wx:if="{{!openInfo}}" bind:click="handleFb" type="primary" long='true' style="position:relative; top:50px;" wx:key="fb">发布简历</i-button>
+  <i-button wx:else bind:click="handleCh" type="error" long='true' style="position:relative; top:50px;" wx:key="ch">撤回简历</i-button>
 </block>

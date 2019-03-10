@@ -68,29 +68,7 @@
 <i-divider content="最新职位" style="position:relative; top:150rpx;"></i-divider>
 <i-row>
   <i-col span="24">
-    <view class='part'>
-      <view class='test' wx:for="{{list}}" wx:key="num">
-        <view class='title' style="display:flex; flex-direction:row; justify-content:space-between; align-items:center;">
-          <view style="font-size:14px; color:black;">招老板</view>
-          <view style="font-size:12px; color:red;">不给钱</view>
-        </view>
-        <view class='ps' style="font-size:12px; color:grey;">只要小姐姐</view>
-        <view class='opts' style="font-size:12px;">啥福利都没有</view>
-        <view class="content" style="display:flex; flex-direction:row; justify-content:flex-start; align-items:center">
-          <image src="{{item.Z_logourl}}" style="width:50px; height:50px; border-style:solid; border-width:1px; border-color:red;"></image>
-          <view style='display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; margin:0px 160px 0px 10px; '>
-            <view style="font-size:12px;">南京众链</view>
-            <view style="font-size:12px;">人民路</view>
-          </view>
-          <view style='display:flex; flex-direction:column; justify-content:space-around; align-items:flex-start'>
-            <view>
-              <button style="font-size:12px;">推荐</button>
-            </view>
-            <view style="font-size:12px;">2天前</view>
-          </view>
-        </view>
-      </view>
-    </view>
+    <jobs showlist="{{showlist}}" style="position:relative; top:140rpx;" bindtap="handleMore"></jobs>
   </i-col>
 </i-row>
 

@@ -35,16 +35,23 @@ Page({
   onLoad: function(options) {
     var that = this
     var query = Bmob.Query("zhiwei");
+    query.include("company")
     query.find().then(res => {
       //console.log(res)
       that.data.list = res //生成初list
       //数据完备，重渲染
-      that.setData({
-        list: that.data.list
-      })
       if (that.data.list.length < 5) {
         that.setData({
-          tip: "已无更多"
+          list: that.data.list,
+          showlist: that.data.list.slice(0, that.data.list.length),
+          tip: "已无更多",
+          pos: that.data.list.length - 1
+        })
+      } else {
+        that.setData({
+          list: that.data.list,
+          showlist: that.data.list.slice(0, 5),
+          pos: 5
         })
       }
     });
@@ -82,7 +89,28 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    var that = this
+    var query = Bmob.Query("zhiwei");
+    query.include("company")
+    query.find().then(res => {
+      //console.log(res)
+      that.data.list = res //生成初list
+      //数据完备，重渲染
+      if (that.data.list.length < 5) {
+        that.setData({
+          list: that.data.list,
+          showlist: that.data.list.slice(0, that.data.list.length),
+          tip: "已无更多",
+          pos: that.data.list.length - 1
+        })
+      } else {
+        that.setData({
+          list: that.data.list,
+          showlist: that.data.list.slice(0, 5),
+          pos: 5
+        })
+      }
+    });
   },
 
   /**
@@ -108,21 +136,46 @@ Page({
       })
     }
   },
+
+  /**
+   * 找工作
+   */
   handleZgz() {
     console.log("zgz")
     wx.navigateTo({
       url: '../comlist/comlist',
     })
   },
+
+  /**
+   * 招人才
+   */
   handleZrc() {
     console.log("zrc")
   },
+
+  /**
+   * 招聘会
+   */
   handleZph() {
     console.log("zph")
   },
+
+  /**
+   * 职场资讯
+   */
   handleZczx() {
     console.log("zczx")
+    var query = Bmob.Query("zhiwei");
+    query.include("company")
+    query.find().then(res => {
+      console.log(res)
+    });
   },
+
+  /**
+   * 发布简历
+   */
   handleFbjl() {
     if (!app.globalData.userInfo) {
       $Toast({
@@ -142,12 +195,24 @@ Page({
       })
     }
   },
+
+  /**
+   * 我的收藏
+   */
   handleWdsc() {
     console.log("wdsc")
   },
+
+  /**
+   * 面试通知
+   */
   handleMstz() {
     console.log("mstz")
   },
+
+  /**
+   * 发布职位
+   */
   handleFbzw() {
     console.log("fbzw")
     if (!app.globalData.userInfo) {
@@ -181,4 +246,32 @@ Page({
     }
   },
 
+  /**
+   * 下拉加载
+   */
+  onReachBottom: function() {
+    var num1 = this.data.list.length
+    var num2 = this.data.showlist.length
+    var that = this
+    if (num2 < num1) {
+      this.setData({
+        tip: "加载中",
+        loading: true,
+      })
+      this.data.showlist = this.data.showlist.concat(this.data.list.slice(that.data.pos, num1))
+      this.setData({
+        showlist: this.data.showlist,
+        tip: "下拉加载",
+        loading: false,
+      })
+    } else {
+      this.setData({
+        tip: "已无更多",
+        loading: false,
+      })
+    }
+  },
+  handleMore() {
+    console.log("test")
+  }
 })

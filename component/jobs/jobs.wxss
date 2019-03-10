@@ -1,53 +1,6 @@
-/* pages/main/main.wxss */
-
-.slide-image {
-  width: 100vw;
-  height: 400rpx;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 16px;
-}
-
-.op1 {
-  background-color: #f87318;
-}
-
-.op2 {
-  background-color: #3fb3ff;
-}
-
-.op3 {
-  background-color: #19e4c6;
-}
-
-.op4 {
-  background-color: #28bd79;
-}
-
-.op5 {
-  background-color: #77ce32;
-}
-
-.op6 {
-  background-color: #229fef;
-}
-
-.op7 {
-  background-color: #fec229;
-}
-
-.op8 {
-  background-color: #fe8a0f;
-}
+/* component/jobs/jobs.wxss */
 
 .part {
-  position: relative;
-  top: 140rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;

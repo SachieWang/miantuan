@@ -94,10 +94,13 @@ Page({
    */
   onLoad: function(options) {
     var status = wx.getStorageSync('status')
+    var openid = wx.getStorageSync('openid')
     var query = Bmob.Query('company');
-    query.equalTo("UserID", "==", status.userInfo.nickName)
+    query.equalTo("openid", "==", openid)
     query.find().then(res => {
+      console.log(res)
       this.data.logourl = res[0].logo
+      this.data.DobjectId = res[0].objectId
     })
   },
 
@@ -208,18 +211,21 @@ Page({
       return false
     }
     var that = this
+    var openid = wx.getStorageSync('openid')
     var status = wx.getStorageSync('status')
-    console.log("zhongduan")
     //生成选项键对象体
     this.data.optskey.xlyq = this.data.index1
     this.data.optskey.gzjy = this.data.index2
     this.data.optskey.gzxz = this.data.index4
     this.data.optskey.gzlx = this.data.index5
     this.data.currentchecks = this.data.currentchecks1.concat(this.data.currentchecks2, this.data.currentchecks3)
-    //判断是否已有简历
+    //生成关联体
+    var pointer = Bmob.Pointer('company')
+    var poiID = pointer.set(that.data.DobjectId)
+    //录入
     var query = Bmob.Query('zhiwei');
-    //非已有则存入
-    query.set("UserID", status.userInfo.nickName)
+    query.set("openid", openid)
+    query.set('company', poiID)
     query.set("Z_gzzw", that.data.value1)
     query.set("Z_gzlx", that.data.qwhy[that.data.index5])
     query.set("Z_xsjj", that.data.value2)

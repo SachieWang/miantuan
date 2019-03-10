@@ -16,6 +16,7 @@ Page({
   data: {
     tip: "下拉加载",
     loading: false,
+    showlist: []
   },
 
   /**
@@ -24,20 +25,26 @@ Page({
   onLoad: function(options) {
     var that = this
     var query = Bmob.Query("zhiwei");
+    query.include("company")
     query.find().then(res => {
       //console.log(res)
       that.data.list = res //生成初list
       //数据完备，重渲染
-      that.setData({
-        list: that.data.list
-      })
       if (that.data.list.length < 5) {
         that.setData({
-          tip: "已无更多"
+          list: that.data.list,
+          showlist: that.data.list.slice(0, that.data.list.length),
+          tip: "已无更多",
+          pos: that.data.list.length - 1
+        })
+      } else {
+        that.setData({
+          list: that.data.list,
+          showlist: that.data.list.slice(0, 5),
+          pos: 5
         })
       }
     });
-
   },
 
   /**
@@ -90,12 +97,11 @@ Page({
   },
 
   onReachBottom: function() {
-    if (this.data.list.length <= 20) {
-      var num = this.data.list.length
-      for (var i = 0; i < 5; i++) {
-        num = this.data.list.length
-        this.data.list = this.data.list.concat(this.data.list)
-      }
+    var num1 = this.data.list.length
+    var num2 = this.data.showlist.length
+    var that = this
+    if (num2 < num1) {
+      this.data.showlist = this.data.showlist.concat(this.data.list.slice(that.data.pos, num1))
       this.setData({
         tip: "加载中",
         loading: true,
@@ -108,18 +114,16 @@ Page({
       setTimeout(() => {
         $Toast.hide();
         this.setData({
-          list: this.data.list,
+          showlist: this.data.showlist,
           tip: "下拉加载",
           loading: false,
         })
       }, 500);
     } else {
       this.setData({
-        list: this.data.list,
         tip: "已无更多",
         loading: false,
       })
     }
-
   },
 })
