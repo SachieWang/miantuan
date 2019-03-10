@@ -93,6 +93,11 @@ Page({
           pos: 5
         })
       }
+      that.setData({
+        logo: that.data.list[0].company.logo,
+        comname: that.data.list[0].company.comname,
+        adress: that.data.list[0].company.adress,
+      })
       wx.stopPullDownRefresh()
     });
   },
