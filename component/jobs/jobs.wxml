@@ -19,7 +19,7 @@
       等
     </view>
     <view class="content">
-      <image src="{{item.Z_logourl}}" style="width:50px; height:50px; border-style:solid; border-width:1px; border-color:red;"></image>
+      <image src="{{item.company.logo}}" style="width:50px; height:50px; border-style:solid; border-width:1px; border-color:red;"></image>
       <view class="msg">
         <view style="font-size:12px;">{{item.company.comname}}</view>
         <view style="color:gray;font-size:12px;">{{item.company.adress}}</view>
