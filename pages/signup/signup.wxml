@@ -44,11 +44,11 @@
   <i-input id="value10" bind:change="handleValueChange" value="{{ value10 }}" type='textarea' placeholder="请填写公司介绍" />
 </i-panel>
 <i-panel title="企业LOGO" hide-border='false'>
-  <image bindtap='bindSelectimg' src='{{logoimg}}' style='position:relative; left:10vw; width:80vw;'>
+  <image bindtap='bindSelectLogo' src='{{logoimg}}' style='position:relative; left:10vw; width:80vw;'>
   </image>
 </i-panel>
 <i-panel title="企业执照或相关证件" hide-border='false'>
-  <image bindtap='bindSelectimg' src='{{infoimg}}' style='position:relative; left:10vw; width:80vw;'>
+  <image bindtap='bindSelectLicense' src='{{infoimg}}' style='position:relative; left:10vw; width:80vw;'>
   </image>
 </i-panel>
 

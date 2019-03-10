@@ -1,5 +1,4 @@
 {
-  "usingComponents": {
-    "jobs":"/component/jobs/jobs"
-  }
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
 }

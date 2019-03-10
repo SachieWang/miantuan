@@ -8,10 +8,11 @@
     "pages/signup/signup",
     "pages/zhiwei/zhiwei",
     "pages/comlist/comlist",
-    "pages/canlist/canlist"
+    "pages/canlist/canlist",
+    "pages/zdetails/zdetails"
   ],
   "window": {
-    "enablePullDownRefresh": true,
+    "enablePullDownRefresh": false,
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#2d8cf0",
     "navigationBarTitleText": "面团",
@@ -40,7 +41,11 @@
     "i-toast": "../../dist/toast/index",
     "i-checkbox-group": "../../dist/checkbox-group/index",
     "i-checkbox": "../../dist/checkbox/index",
-    "i-load-more": "../../dist/load-more/index"
+    "i-load-more": "../../dist/load-more/index",
+    "jobs": "/component/jobs/jobs",
+    "i-collapse": "../../dist/collapse/index",
+    "i-collapse-item": "../../dist/collapse-item/index",
+    "i-swipeout": "../../dist/swipeout/index"
   },
   "permission": {
     "scope.userLocation": {

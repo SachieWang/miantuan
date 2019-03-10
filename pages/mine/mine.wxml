@@ -1,6 +1,6 @@
 <!--pages/mine/mine.wxml-->
 <block wx:if="{{!hasUserInfo && canIUse}}">
-  <i-card title="账户余额：￥0" extra="未登录" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  <i-card title="账户余额：￥0" extra="未登录" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg" full="true">
     <view slot="content">
       <i-button i-class='text' open-type="getUserInfo" bindgetuserinfo="getUserInfo" type='info' size='small' shape='circle'>登录</i-button>
     </view>
@@ -11,7 +11,8 @@
   </i-card>
 </block>
 <block wx:else>
-  <i-card title="账户余额：￥{{ballery}}" extra="{{userInfo.nickName}}" thumb="{{userInfo.avatarUrl}}">
+  <i-card extra="{{userInfo.nickName}}" thumb="{{userInfo.avatarUrl}}" full="true">
+    <!--i-card title="账户余额：￥{{ballery}}" extra="{{userInfo.nickName}}" thumb="{{userInfo.avatarUrl}}"-->
     <view slot="content">
       <i-button i-class='text' type='info' size='small' shape='circle' bindtap="edit">简历编辑</i-button>
       <!--text class='text'>简历编辑</text-->

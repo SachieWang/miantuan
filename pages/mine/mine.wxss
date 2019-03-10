@@ -13,7 +13,7 @@
 
 .row2 {
   position: relative;
-  top: 40rpx;
+  top: 6rpx;
 }
 
 .grid1 {
@@ -53,5 +53,5 @@
   background-color: #5cadff;
   border-radius: 25px;
   position: relative;
-  left: 200px;
+  left: 500rpx;
 }

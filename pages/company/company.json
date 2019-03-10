@@ -1,4 +1,5 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {},
   "navigationBarTitleText": "企业中心 - 面团"
 }

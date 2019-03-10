@@ -110,15 +110,12 @@ Page({
    * 获取用户信息
    */
   getUserInfo: function(e) {
+    var that = this
     if (!e.detail.userInfo) {
       console.log("获取失败")
       return false
     }
     app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
     // 存储用户基本信息
     var status = wx.getStorageSync('status') || {}
     status = app.globalData
@@ -134,7 +131,6 @@ Page({
       duration: 0,
     });
     setTimeout(() => {
-      $Toast.hide();
       //判断是否为系统新用户
       var openid = wx.getStorageSync('openid')
       var query = Bmob.Query("individual")
@@ -148,9 +144,20 @@ Page({
           query.set("openInfo", false)
           query.save().then(res => {
             console.log(res)
+            that.setData({
+              userInfo: e.detail.userInfo,
+              hasUserInfo: true
+            })
+            $Toast.hide();
           }).catch(err => {
             console.log(err)
           })
+        } else {
+          that.setData({
+            userInfo: e.detail.userInfo,
+            hasUserInfo: true
+          })
+          $Toast.hide();
         }
       })
     }, 3000);

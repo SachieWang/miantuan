@@ -5,7 +5,11 @@
       <view style="font-size:14px; color:black;">招{{item.Z_gzzw}}{{item.Z_zprs}}位</view>
       <view style="font-size:12px; color:red;">{{item.Z_xzdy}}</view>
     </view>
-    <view class='ps' style="font-size:12px; color:grey;">{{item.Z_gender}}</view>
+    <view style="display:flex; flex-direction:row;font-size:12px; color:grey;">
+      <view class='ps'>{{item.Z_gender}}|</view>
+      <view>{{item.Z_xlyq}}|</view>
+      <view>{{item.Z_nlyq}}</view>
+    </view>
     <view class="welfare" style="font-size:12px;">
       <view wx:for="{{item.Z_tsfw}}" wx:for-index="idx" wx:key="{{item.Z_tsfw.index}}">
         <view class='opts' wx:if="{{idx<3&&idx==0}}" style="color:#7ba86a;background-color:#e4fcdc; margin-right:10rpx;">{{item}}</view>

@@ -27,7 +27,7 @@ Page({
     value10: '',
     logoimg: "https://i.loli.net/2017/08/21/599a521472424.jpg",
     infoimg: "https://i.loli.net/2017/08/21/599a521472424.jpg",
-    comsignup:false,
+    comsignup: false,
   },
 
   /**
@@ -41,7 +41,7 @@ Page({
     query.equalTo("UserID", "==", name)
     query.find().then(res => {
       that.setData({
-        comsignup:true,
+        comsignup: true,
       })
     })
     //加载企业注册信息
@@ -179,7 +179,9 @@ Page({
             res.set("tellphone", this.data.value6)
             res.set("adress", this.data.dizhi)
             res.set("username", this.data.value7)
-            res.set("password", this.data.value8)
+            if (that.data.value8 != "") {
+              res.set("password", this.data.value8)
+            }
             res.set("introduce", this.data.value10)
             res.set("logo", this.data.logoimg)
             res.set("license", this.data.infoimg)
@@ -291,6 +293,60 @@ Page({
     this.setData({
       region: e.detail.value,
       index1: 0
+    })
+  },
+
+  /**
+   * 上传照片
+   */
+  bindSelectLogo() {
+    var that = this
+    //上传照片
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        var tempFilePaths = res.tempFilePaths
+        var file;
+        for (let item of tempFilePaths) {
+          var name = item.split(".")[2]
+          var suffix = item.split(".")[3]
+          file = Bmob.File(name + '.' + suffix, item);
+        }
+        file.save().then(res => {
+          that.setData({
+            logoimg: res[0].url
+          })
+        })
+      }
+    })
+  },
+
+  /**
+   * 上传照片
+   */
+  bindSelectLicense() {
+    var that = this
+    //上传照片
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success(res) {
+        var tempFilePaths = res.tempFilePaths
+        var file;
+        for (let item of tempFilePaths) {
+          var name = item.split(".")[2]
+          var suffix = item.split(".")[3]
+          file = Bmob.File(name + '.' + suffix, item);
+        }
+        file.save().then(res => {
+          that.setData({
+            infoimg: res[0].url
+          })
+        })
+      }
     })
   },
 })

@@ -41,57 +41,65 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "homepage",
+					"name": "主页",
 					"pathName": "pages/homepage/homepage",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "mine",
+					"id": 1,
+					"name": "个人页",
 					"pathName": "pages/mine/mine",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "edit",
+					"id": 2,
+					"name": "简历编辑",
 					"pathName": "pages/edit/edit",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "company",
+					"id": 3,
+					"name": "企业中心",
 					"pathName": "pages/company/company",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "comenter",
+					"id": 4,
+					"name": "企业登陆",
 					"pathName": "pages/comenter/comenter",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "signup",
+					"id": 5,
+					"name": "企业注册",
 					"pathName": "pages/signup/signup",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "zhiwei",
+					"id": 6,
+					"name": "职位发布",
 					"pathName": "pages/zhiwei/zhiwei",
 					"query": "",
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "comlist",
+					"id": 7,
+					"name": "招聘列表",
 					"pathName": "pages/comlist/comlist",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "招聘详情页",
+					"pathName": "pages/zdetails/zdetails",
+					"query": "",
 					"scene": null
 				}
 			]

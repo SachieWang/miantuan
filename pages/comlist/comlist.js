@@ -79,7 +79,29 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    var that = this
+    var query = Bmob.Query("zhiwei");
+    query.include("company")
+    query.find().then(res => {
+      //console.log(res)
+      that.data.list = res //生成初list
+      //数据完备，重渲染
+      if (that.data.list.length < 5) {
+        that.setData({
+          list: that.data.list,
+          showlist: that.data.list.slice(0, that.data.list.length),
+          tip: "已无更多",
+          pos: that.data.list.length - 1
+        })
+      } else {
+        that.setData({
+          list: that.data.list,
+          showlist: that.data.list.slice(0, 5),
+          pos: 5
+        })
+      }
+      wx.stopPullDownRefresh()
+    });
   },
 
   /**
@@ -126,4 +148,14 @@ Page({
       })
     }
   },
+
+  /**
+   * 详情
+   */
+  handleMore() {
+    console.log("test")
+    wx.navigateTo({
+      url: '/pages/zdetails/zdetails',
+    })
+  }
 })

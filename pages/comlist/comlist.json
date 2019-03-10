@@ -1,4 +1,5 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {},
   "navigationBarTitleText": "找工作 - 面团"
 }

@@ -1,9 +1,15 @@
 <!--pages/company/company.wxml-->
-<view class='panel p1' bindtap='handleinfoadmin'>
-企业信息管理
-</view>
-<view class='panel p2'>
-</view>
+<i-card title="" extra="企业信息管理" thumb="{{logo}}" full="true" bindtap='handleinfoadmin'>
+  <view slot="content">{{comname}}</view>
+  <view slot="footer">{{adress}}</view>
+</i-card>
+<i-collapse name="name1">
+  <i-collapse-item name="name1" title="发布的招聘" i-class-title="collapse-item-title" i-class-content="collapse-item-content">
+    <view slot="content">
+      <jobs showlist="{{list}}" bindtap="handleMore" />
+    </view>
+  </i-collapse-item>
+</i-collapse>
 <view class='panel p3'>
 </view>
 <view class='panel p4'>

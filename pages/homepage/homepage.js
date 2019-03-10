@@ -110,6 +110,7 @@ Page({
           pos: 5
         })
       }
+      wx.stopPullDownRefresh()
     });
   },
 
@@ -271,7 +272,14 @@ Page({
       })
     }
   },
+
+  /**
+   * 详情
+   */
   handleMore() {
     console.log("test")
+    wx.navigateTo({
+      url: '/pages/zdetails/zdetails',
+    })
   }
 })

@@ -1,5 +1,5 @@
 <!--pages/comlist/comlist.wxml-->
-<view class='part'>
+<!--view class='part'>
   <view class='list_item' wx:for="{{showlist}}" wx:for-index="idxw" wx:key="num">
     <view class='title'>
       <view style="font-size:14px; color:black;">招{{item.Z_gzzw}}{{item.Z_zprs}}位</view>
@@ -26,6 +26,7 @@
       </view>
     </view>
   </view>
-</view>
+</view-->
+<jobs showlist="{{showlist}}" bindtap="handleMore" />
 <i-toast id="toast" />
 <i-load-more tip="{{tip}}" loading="{{loading}}" />
