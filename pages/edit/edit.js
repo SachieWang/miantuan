@@ -51,7 +51,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this
     var openid = wx.getStorageSync('openid')
     //查询是否已有简历且开放
@@ -96,14 +96,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     var that = this
     var openid = wx.getStorageSync('openid')
     //查询是否已有简历
@@ -146,35 +146,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
@@ -264,17 +264,36 @@ Page({
       sourceType: ['album', 'camera'],
       success(res) {
         var tempFilePaths = res.tempFilePaths
-        var file;
         for (let item of tempFilePaths) {
-          var name = item.split(".")[2]
-          var suffix = item.split(".")[3]
-          file = Bmob.File(name + '.' + suffix, item);
+          var fileInfoArray = item.split("/");
+          var fileName = fileInfoArray[fileInfoArray.length - 1];
+
+          //转存至云开发存储
+          wx.cloud.uploadFile({
+            cloudPath: fileName, // 上传至云端的路径
+            filePath: item, // 小程序临时文件路径
+            success: res => {
+              // 返回文件 ID
+              console.log(res.fileID);
+              that.setData({
+                myimg: res.fileID //res[0].url
+              });
+            },
+            fail: console.error
+          });
         }
-        file.save().then(res => {
-          that.setData({
-            myimg: res[0].url
-          })
-        })
+
+
+        // for (let item of tempFilePaths) {
+        //   var name = item.split(".")[2]
+        //   var suffix = item.split(".")[3]
+        //   file = Bmob.File(name + '.' + suffix, item);
+        // }
+        // file.save().then(res => {
+        //   that.setData({
+        //     myimg: res[0].url
+        //   })
+        // })
       }
     })
   },
