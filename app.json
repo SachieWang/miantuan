@@ -21,31 +21,31 @@
     "onReachBottomDistance": 5
   },
   "usingComponents": {
-    "i-row": "../../dist/row/index",
-    "i-col": "../../dist/col/index",
-    "i-panel": "../../dist/panel/index",
-    "i-grid": "../../dist/grid/index",
-    "i-grid-item": "../../dist/grid-item/index",
-    "i-grid-icon": "../../dist/grid-icon/index",
-    "i-grid-label": "../../dist/grid-label/index",
-    "i-card": "../../dist/card/index",
-    "i-tab-bar": "../../dist/tab-bar/index",
-    "i-tab-bar-item": "../../dist/tab-bar-item/index",
-    "i-button": "../../dist/button/index",
-    "i-avatar": "../../dist/avatar/index",
-    "i-icon": "../../dist/icon/index",
-    "i-input": "../../dist/input/index",
-    "i-radio-group": "../../dist/radio-group/index",
-    "i-radio": "../../dist/radio/index",
-    "i-divider": "../../dist/divider/index",
-    "i-toast": "../../dist/toast/index",
-    "i-checkbox-group": "../../dist/checkbox-group/index",
-    "i-checkbox": "../../dist/checkbox/index",
-    "i-load-more": "../../dist/load-more/index",
-    "jobs": "/component/jobs/jobs",
-    "i-collapse": "../../dist/collapse/index",
-    "i-collapse-item": "../../dist/collapse-item/index",
-    "i-swipeout": "../../dist/swipeout/index"
+    "i-row": "/dist/row/index",
+    "i-col": "/dist/col/index",
+    "i-panel": "/dist/panel/index",
+    "i-grid": "/dist/grid/index",
+    "i-grid-item": "/dist/grid-item/index",
+    "i-grid-icon": "/dist/grid-icon/index",
+    "i-grid-label": "/dist/grid-label/index",
+    "i-card": "/dist/card/index",
+    "i-tab-bar": "/dist/tab-bar/index",
+    "i-tab-bar-item": "/dist/tab-bar-item/index",
+    "i-button": "/dist/button/index",
+    "i-avatar": "/dist/avatar/index",
+    "i-icon": "/dist/icon/index",
+    "i-input": "/dist/input/index",
+    "i-radio-group": "/dist/radio-group/index",
+    "i-radio": "/dist/radio/index",
+    "i-divider": "/dist/divider/index",
+    "i-toast": "/dist/toast/index",
+    "i-checkbox-group": "/dist/checkbox-group/index",
+    "i-checkbox": "/dist/checkbox/index",
+    "i-load-more": "/dist/load-more/index",
+    "i-collapse": "/dist/collapse/index",
+    "i-collapse-item": "/dist/collapse-item/index",
+    "i-swipeout": "/dist/swipeout/index",
+    "jobs": "/component/jobs/jobs"
   },
   "permission": {
     "scope.userLocation": {
@@ -67,5 +67,6 @@
         "selectedIconPath": "/icon/mmyy.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

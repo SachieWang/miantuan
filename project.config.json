@@ -1,108 +1,132 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"autoAudits": false
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.5.2",
-	"appid": "wxe943132f7acdc70c",
-	"projectname": "%E9%9D%A2%E5%9B%A2",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": 7,
-			"list": [
-				{
-					"id": 0,
-					"name": "主页",
-					"pathName": "pages/homepage/homepage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "个人页",
-					"pathName": "pages/mine/mine",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 2,
-					"name": "简历编辑",
-					"pathName": "pages/edit/edit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 3,
-					"name": "企业中心",
-					"pathName": "pages/company/company",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 4,
-					"name": "企业登陆",
-					"pathName": "pages/comenter/comenter",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "企业注册",
-					"pathName": "pages/signup/signup",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 6,
-					"name": "职位发布",
-					"pathName": "pages/zhiwei/zhiwei",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "招聘列表",
-					"pathName": "pages/comlist/comlist",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "招聘详情页",
-					"pathName": "pages/zdetails/zdetails",
-					"query": "",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "enableEngineNative": false,
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.5.2",
+  "appid": "wxe943132f7acdc70c",
+  "projectname": "%E9%9D%A2%E5%9B%A2",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "主页",
+          "pathName": "pages/homepage/homepage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "个人页",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 2,
+          "name": "简历编辑",
+          "pathName": "pages/edit/edit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "企业中心",
+          "pathName": "pages/company/company",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "企业登陆",
+          "pathName": "pages/comenter/comenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "企业注册",
+          "pathName": "pages/signup/signup",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 6,
+          "name": "职位发布",
+          "pathName": "pages/zhiwei/zhiwei",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "招聘列表",
+          "pathName": "pages/comlist/comlist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "招聘详情页",
+          "pathName": "pages/zdetails/zdetails",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
 }
