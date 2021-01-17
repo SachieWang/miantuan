@@ -1,5 +1,5 @@
 // pages/mine/mine.js
-var Bmob = require('../../src/lib/app.js');
+var Bmob = require('../../lib/app.js');
 Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
 const {
   $Toast
