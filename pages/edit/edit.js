@@ -256,44 +256,82 @@ Page({
    * 上传照片
    */
   bindSelectimg() {
-    var that = this
+    var that = this;
+
     //上传照片
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        var tempFilePaths = res.tempFilePaths
-        for (let item of tempFilePaths) {
-          var fileInfoArray = item.split("/");
-          var fileName = fileInfoArray[fileInfoArray.length - 1];
-
-          //转存至云开发存储
-          wx.cloud.uploadFile({
-            cloudPath: fileName, // 上传至云端的路径
-            filePath: item, // 小程序临时文件路径
-            success: res => {
-              // 返回文件 ID
-              console.log(res.fileID);
-              that.setData({
-                myimg: res.fileID //res[0].url
-              });
-            },
-            fail: console.error
-          });
-        }
-
-
-        // for (let item of tempFilePaths) {
-        //   var name = item.split(".")[2]
-        //   var suffix = item.split(".")[3]
-        //   file = Bmob.File(name + '.' + suffix, item);
-        // }
-        // file.save().then(res => {
-        //   that.setData({
-        //     myimg: res[0].url
-        //   })
-        // })
+        var tempFilePaths = res.tempFilePaths;
+        //新文件持久化到本地，获取文件摘要，区分文件
+        wx.saveFile({
+          tempFilePath: tempFilePaths[0],
+          success(res) {
+            const savedNewFilePath = res.savedFilePath;
+            //获取待上传文件摘要
+            var newFileDigest = "";
+            wx.getFileInfo({
+              filePath: savedNewFilePath,
+              success(res) {
+                newFileDigest = res.digest;
+                console.log(newFileDigest);
+                //下载获取已有相关文件
+                const downloadTask = wx.cloud.downloadFile({
+                  fileID: that.data.myimg,
+                  success: res => {
+                    wx.saveFile({
+                      tempFilePath: res.tempFilePath,
+                      success(res) {
+                        wx.getFileInfo({
+                          filePath: res.savedFilePath,
+                          success(res) {
+                            //比较摘要，相同则不上传
+                            console.log("old file disgest: ", res.digest);
+                            console.log("new file disgest: ", newFileDigest);
+                            if (res.digest != newFileDigest) {
+                              var fileInfoArray = savedNewFilePath.split("/");
+                              var fileName = fileInfoArray[fileInfoArray.length - 1];
+                              //转存至云开发存储
+                              wx.cloud.uploadFile({
+                                //TODO 未完成，此处待修改，利用上传覆盖写机制避免冗余文件
+                                cloudPath: fileName, // 上传至云端的路径
+                                filePath: savedNewFilePath, // 文件路径
+                                success: res => {
+                                  // 返回文件 ID
+                                  console.log("新文件上传成功，文件ID：", res.fileID);
+                                  that.setData({
+                                    myimg: res.fileID //res[0].url
+                                  });
+                                },
+                                fail: console.error
+                              });
+                            }
+                          },
+                          fail(err) {
+                            console.error(err);
+                          }
+                        })
+                      },
+                      fail(err) {
+                        console.error(err);
+                      }
+                    })
+                  },
+                  fail: err => {
+                    // handle error
+                  }
+                });
+                downloadTask.onProgressUpdate((res) => {
+                  console.log('下载进度', res.progress)
+                  console.log('已经下载的数据长度', res.totalBytesWritten)
+                  console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+                });
+              }
+            });
+          }
+        });
       }
     })
   },
