@@ -33,12 +33,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    var that = this
-    var name = wx.getStorageSync("status").userInfo.nickName
+  onLoad: function (options) {
+    var that = this;
+    // var name = wx.getStorageSync("status").userInfo.nickName
+    var name = wx.getStorageSync("openid");
     //查询是否已注册
     var query = Bmob.Query("individual");
-    query.equalTo("UserID", "==", name)
+    query.equalTo("openid", "==", name);
     query.find().then(res => {
       that.setData({
         comsignup: true,
@@ -46,7 +47,7 @@ Page({
     })
     //加载企业注册信息
     query = Bmob.Query("company");
-    query.equalTo("UserID", "==", name);
+    query.equalTo("openid", "==", name);
     query.find().then(res => {
       console.log(res)
       if (res.length == 1) {
@@ -74,49 +75,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
@@ -124,11 +125,15 @@ Page({
    * 注册
    */
   handleSignup() {
+    wx.showLoading({
+      title: '保存中...',
+    })
     var that = this
     var status = wx.getStorageSync('status')
+    var openid = wx.getStorageSync('openid')
     //判断是否已有企业信息
     var query = Bmob.Query('company');
-    query.equalTo("UserID", "==", status.userInfo.nickName)
+    query.equalTo("openid", "==", openid)
     query.find().then(res => {
       if (res.length == 0) {
         //非已有则存入
@@ -148,24 +153,19 @@ Page({
         query.set("license", this.data.infoimg)
         query.save().then(res => {
           if (res.objectId) {
-            $Toast({
-              content: '注册成功',
-              type: 'success',
-              duration: 0,
-            });
-            setTimeout(() => {
-              wx.navigateBack({
-                delta: 1
-              })
-              $Toast.hide();
-            }, 300);
+            wx.hideLoading();
+            wx.showToast({
+              title: '注册成功',
+              icon: 'success',
+              duration: 800
+            })
           }
           console.log(res)
         }).catch(err => {
           console.log(err)
         })
       } else {
-        query.equalTo("UserID", "==", status.userInfo.nickName)
+        query.equalTo("openid", "==", openid)
         query.find().then(res => {
           query.get(res[0].objectId).then(res => {
             //已有则更新
@@ -186,14 +186,12 @@ Page({
             res.set("logo", this.data.logoimg)
             res.set("license", this.data.infoimg)
             res.save().then(res => {
-              $Toast({
-                content: '信息更新成功',
-                type: 'success',
-                duration: 0,
+              wx.hideLoading();
+              wx.showToast({
+                title: '信息更新成功',
+                icon: 'success',
+                duration: 800
               });
-              setTimeout(() => {
-                $Toast.hide();
-              }, 300);
               console.log(res)
             }).catch(err => {
               console.log(err)
@@ -307,18 +305,80 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        var tempFilePaths = res.tempFilePaths
-        var file;
-        for (let item of tempFilePaths) {
-          var name = item.split(".")[2]
-          var suffix = item.split(".")[3]
-          file = Bmob.File(name + '.' + suffix, item);
-        }
-        file.save().then(res => {
-          that.setData({
-            logoimg: res[0].url
-          })
-        })
+        var tempFilePaths = res.tempFilePaths;
+
+        //新文件持久化到本地，获取文件摘要，区分文件
+        wx.saveFile({
+          tempFilePath: tempFilePaths[0],
+          success(res) {
+            const savedNewFilePath = res.savedFilePath;
+            //获取待上传文件摘要
+            var newFileDigest = "";
+            wx.getFileInfo({
+              filePath: savedNewFilePath,
+              success(res) {
+                newFileDigest = res.digest;
+                console.log(newFileDigest);
+                //下载获取已有相关文件
+                wx.cloud.downloadFile({
+                  fileID: that.data.logoimg,
+                  success: res => {
+                    wx.saveFile({
+                      tempFilePath: res.tempFilePath,
+                      success(res) {
+                        wx.getFileInfo({
+                          filePath: res.savedFilePath,
+                          success(res) {
+                            //比较摘要，相同则不上传
+                            console.log("old file disgest: ", res.digest);
+                            console.log("new file disgest: ", newFileDigest);
+                            if (res.digest != newFileDigest) {
+                              var fileInfoArray = savedNewFilePath.split("/");
+                              var fileName = fileInfoArray[fileInfoArray.length - 1];
+                              var suffix = fileName.split(".")[1];
+                              //转存至云开发存储
+                              wx.showLoading({
+                                title: '上传 0%',
+                              })
+                              const uploadTask = wx.cloud.uploadFile({
+                                //利用上传覆盖写机制避免冗余文件
+                                cloudPath: 'miantuan/company_pics/company_' + wx.getStorageSync('openid') + '/logo/' + newFileDigest + '.' + suffix, // 上传至云端的路径
+                                filePath: savedNewFilePath, // 文件路径
+                                success: res => {
+                                  // 返回文件 ID
+                                  console.log("新文件上传成功，文件ID：", res.fileID);
+                                  that.setData({
+                                    logoimg: res.fileID //res[0].url
+                                  });
+                                  wx.hideLoading();
+                                },
+                                fail: console.error
+                              });
+                              uploadTask.onProgressUpdate(res => {
+                                wx.showLoading({
+                                  title: '上传 ' + res.progress + '%',
+                                })
+                              })
+                            }
+                          },
+                          fail(err) {
+                            console.error(err);
+                          }
+                        })
+                      },
+                      fail(err) {
+                        console.error(err);
+                      }
+                    })
+                  },
+                  fail: err => {
+                    // handle error
+                  }
+                });
+              }
+            });
+          }
+        });
       }
     })
   },
@@ -334,18 +394,80 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        var tempFilePaths = res.tempFilePaths
-        var file;
-        for (let item of tempFilePaths) {
-          var name = item.split(".")[2]
-          var suffix = item.split(".")[3]
-          file = Bmob.File(name + '.' + suffix, item);
-        }
-        file.save().then(res => {
-          that.setData({
-            infoimg: res[0].url
-          })
-        })
+        var tempFilePaths = res.tempFilePaths;
+
+        //新文件持久化到本地，获取文件摘要，区分文件
+        wx.saveFile({
+          tempFilePath: tempFilePaths[0],
+          success(res) {
+            const savedNewFilePath = res.savedFilePath;
+            //获取待上传文件摘要
+            var newFileDigest = "";
+            wx.getFileInfo({
+              filePath: savedNewFilePath,
+              success(res) {
+                newFileDigest = res.digest;
+                console.log(newFileDigest);
+                //下载获取已有相关文件
+                wx.cloud.downloadFile({
+                  fileID: that.data.infoimg,
+                  success: res => {
+                    wx.saveFile({
+                      tempFilePath: res.tempFilePath,
+                      success(res) {
+                        wx.getFileInfo({
+                          filePath: res.savedFilePath,
+                          success(res) {
+                            //比较摘要，相同则不上传
+                            console.log("old file disgest: ", res.digest);
+                            console.log("new file disgest: ", newFileDigest);
+                            if (res.digest != newFileDigest) {
+                              var fileInfoArray = savedNewFilePath.split("/");
+                              var fileName = fileInfoArray[fileInfoArray.length - 1];
+                              var suffix = fileName.split(".")[1];
+                              //转存至云开发存储
+                              wx.showLoading({
+                                title: '上传 0%',
+                              })
+                              const uploadTask = wx.cloud.uploadFile({
+                                //利用上传覆盖写机制避免冗余文件
+                                cloudPath: 'miantuan/company_pics/company_' + wx.getStorageSync('openid') + '/info/' + newFileDigest + '.' + suffix, // 上传至云端的路径
+                                filePath: savedNewFilePath, // 文件路径
+                                success: res => {
+                                  // 返回文件 ID
+                                  console.log("新文件上传成功，文件ID：", res.fileID);
+                                  that.setData({
+                                    infoimg: res.fileID //res[0].url
+                                  });
+                                  wx.hideLoading();
+                                },
+                                fail: console.error
+                              });
+                              uploadTask.onProgressUpdate(res => {
+                                wx.showLoading({
+                                  title: '上传 ' + res.progress + '%',
+                                })
+                              })
+                            }
+                          },
+                          fail(err) {
+                            console.error(err);
+                          }
+                        })
+                      },
+                      fail(err) {
+                        console.error(err);
+                      }
+                    })
+                  },
+                  fail: err => {
+                    // handle error
+                  }
+                });
+              }
+            });
+          }
+        });
       }
     })
   },

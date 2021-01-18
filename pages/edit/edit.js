@@ -278,7 +278,7 @@ Page({
                 newFileDigest = res.digest;
                 console.log(newFileDigest);
                 //下载获取已有相关文件
-                const downloadTask = wx.cloud.downloadFile({
+                wx.cloud.downloadFile({
                   fileID: that.data.myimg,
                   success: res => {
                     wx.saveFile({
@@ -293,10 +293,14 @@ Page({
                             if (res.digest != newFileDigest) {
                               var fileInfoArray = savedNewFilePath.split("/");
                               var fileName = fileInfoArray[fileInfoArray.length - 1];
+                              var suffix = fileName.split(".")[1];
                               //转存至云开发存储
-                              wx.cloud.uploadFile({
-                                //TODO 未完成，此处待修改，利用上传覆盖写机制避免冗余文件
-                                cloudPath: fileName, // 上传至云端的路径
+                              wx.showLoading({
+                                title: '上传 0%',
+                              })
+                              const uploadTask = wx.cloud.uploadFile({
+                                //利用上传覆盖写机制避免冗余文件
+                                cloudPath: 'miantuan/ID_Photos/user_' + wx.getStorageSync('openid') + '/' + newFileDigest + '.' + suffix, // 上传至云端的路径
                                 filePath: savedNewFilePath, // 文件路径
                                 success: res => {
                                   // 返回文件 ID
@@ -304,9 +308,15 @@ Page({
                                   that.setData({
                                     myimg: res.fileID //res[0].url
                                   });
+                                  wx.hideLoading();
                                 },
                                 fail: console.error
                               });
+                              uploadTask.onProgressUpdate(res => {
+                                wx.showLoading({
+                                  title: '上传 ' + res.progress + '%',
+                                })
+                              })
                             }
                           },
                           fail(err) {
@@ -323,11 +333,6 @@ Page({
                     // handle error
                   }
                 });
-                downloadTask.onProgressUpdate((res) => {
-                  console.log('下载进度', res.progress)
-                  console.log('已经下载的数据长度', res.totalBytesWritten)
-                  console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
-                });
               }
             });
           }
@@ -341,7 +346,7 @@ Page({
    */
   handleSubmit() {
     var that = this
-    var openid = wx.getStorageSync('openid')
+    var openid = wx.getStorageSync('openid');
     //生成选项键对象体
     this.data.optskey.v5id = this.data.index1
     this.data.optskey.v6id = this.data.index2
@@ -380,8 +385,8 @@ Page({
           query.equalTo("openid", "==", openid)
           query.find().then(res => {
             query.get(res[0].objectId).then(res => {
-              res.set('haveResume', true)
-              res.save()
+              res.set('haveResume', true);
+              res.save();
             }).catch(err => {
               console.log(err)
             })
@@ -397,6 +402,9 @@ Page({
    * 更新简历
    */
   handleGx() {
+    wx.showLoading({
+      title: '更新简历中...',
+    });
     var that = this
     //生成选项键对象体
     this.data.optskey.v5id = this.data.index1
@@ -429,6 +437,12 @@ Page({
         res.set("R_image", that.data.myimg)
         res.set("R_optskey", that.data.optskey)
         res.save()
+        wx.hideLoading()
+        wx.showToast({
+          title: '更新成功',
+          icon: 'success',
+          duration: 800
+        })
       }).catch(err => {
         console.log(err)
       })
