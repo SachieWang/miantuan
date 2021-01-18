@@ -1,6 +1,7 @@
 <!--component/jobs/jobs.wxml-->
 <view class='part'>
-  <view class='list_item' bindtap="onTap" wx:for="{{showlist}}" wx:for-index="idxw" wx:key="num">
+  <view class='list_item' bindtap="onTap" wx:for="{{showlist}}" wx:for-index="idxw" wx:key="num"
+    data-objectId="{{item.objectId}}">
     <view class='title'>
       <view style="font-size:14px; color:black;">招{{item.Z_gzzw}}{{item.Z_zprs}}位</view>
       <view style="font-size:12px; color:red;">{{item.Z_xzdy}}</view>
@@ -12,14 +13,17 @@
     </view>
     <view class="welfare" style="font-size:12px;">
       <view wx:for="{{item.Z_tsfw}}" wx:for-index="idx" wx:key="{{item.Z_tsfw.index}}">
-        <view class='opts' wx:if="{{idx<3&&idx==0}}" style="color:#7ba86a;background-color:#e4fcdc; margin-right:10rpx;">{{item}}</view>
-        <view class='opts' wx:if="{{idx<3&&idx==1}}" style="color:#db9b5e;background-color:#fff5d9; margin-right:10rpx;">{{item}}</view>
-        <view class='opts' wx:if="{{idx<3&&idx==2}}" style="color:#409fc2;background-color:#def5fe; margin-right:10rpx;">{{item}}</view>
+        <view class='opts' wx:if="{{idx<3&&idx==0}}"
+          style="color:#7ba86a;background-color:#e4fcdc; margin-right:10rpx;">{{item}}</view>
+        <view class='opts' wx:if="{{idx<3&&idx==1}}"
+          style="color:#db9b5e;background-color:#fff5d9; margin-right:10rpx;">{{item}}</view>
+        <view class='opts' wx:if="{{idx<3&&idx==2}}"
+          style="color:#409fc2;background-color:#def5fe; margin-right:10rpx;">{{item}}</view>
       </view>
       等
     </view>
     <view class="content">
-      <image src="{{item.company.logo}}" style="width:50px; height:50px; border-style:solid; border-width:1px; border-color:red;"></image>
+      <image src="{{item.company.logo}}" style="width:50px; height:50px;"></image>
       <view class="msg">
         <view style="font-size:12px;">{{item.company.comname}}</view>
         <view style="color:gray;font-size:12px;">{{item.company.adress}}</view>

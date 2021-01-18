@@ -28,10 +28,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onTap() {
-      const myEventDetail = {}
-      const myEventOption = {}
-      this.triggerEvent('myevent', myEventDetail, myEventOption)
+    onTap(e) {
+      console.log("组件内数据：", e);
+      const myEventDetail = {
+        objectid: e.currentTarget.dataset.objectid
+      };
+      const myEventOption = {};
+      this.triggerEvent('myTap', myEventDetail, myEventOption)
     }
   }
 })
