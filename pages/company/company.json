@@ -1,5 +1,7 @@
 {
   "enablePullDownRefresh": true,
-  "usingComponents": {},
+  "usingComponents": {
+    "mp-slideview": "weui-miniprogram/slideview/slideview"
+  },
   "navigationBarTitleText": "企业中心 - 面团"
 }

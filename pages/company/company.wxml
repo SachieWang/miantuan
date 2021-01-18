@@ -4,13 +4,14 @@
   <view slot="footer">{{adress}}</view>
 </i-card>
 <i-collapse name="name1">
-  <i-collapse-item name="name1" title="发布的招聘" i-class-title="collapse-item-title" i-class-content="collapse-item-content">
+  <i-collapse-item name="name1" title="发布的招聘" i-class-title="collapse-item-title"
+    i-class-content="collapse-item-content">
     <view slot="content">
       <jobs showlist="{{list}}" bindtap="handleMore" />
     </view>
   </i-collapse-item>
 </i-collapse>
-<view class='panel p3'>
+<!-- <view class='panel p3'>
 </view>
 <view class='panel p4'>
-</view>
+</view> -->
