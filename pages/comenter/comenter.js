@@ -25,20 +25,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     //console.log(options)
     this.setData({
       url: options.path
     })
     var that = this
-    var name = wx.getStorageSync("status").userInfo.nickName
+    // var name = wx.getStorageSync("status").userInfo.nickName
+    var name = wx.getStorageSync('openid');
     //查询是否已注册
     var query = Bmob.Query("company");
-    query.equalTo("UserID", "==", name)
+    query.equalTo("openid", "==", name)
     query.find().then(res => {
       console.log(res)
       if (res.length == 0) {
-        console.log("test")
         $Toast({
           content: '您尚未注册企业账号',
           type: 'warning',
@@ -58,71 +58,72 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    var that = this
-    var name = wx.getStorageSync("status").userInfo.nickName
-    //查询是否已注册
-    var query = Bmob.Query("company");
-    query.equalTo("UserID", "==", name)
-    query.find().then(res => {
-      console.log(res)
-      if (res.length == 0) {
-        console.log("test")
-        $Toast({
-          content: '您尚未注册企业账号',
-          type: 'warning',
-          duration: 0,
-        });
-        setTimeout(() => {
-          $Toast.hide();
-        }, 300);
-      } else {
-        that.setData({
-          value1: res[0].username
-        })
-      }
-    })
+  onShow: function () {
+    // var that = this;
+    // // var name = wx.getStorageSync("status").userInfo.nickName;
+    // var name = wx.getStorageSync('openid');
+    // //查询是否已注册
+    // var query = Bmob.Query("company");
+    // query.equalTo("openid", "==", name)
+    // query.find().then(res => {
+    //   console.log(res)
+    //   if (res.length == 0) {
+    //     console.log("test")
+    //     $Toast({
+    //       content: '您尚未注册企业账号',
+    //       type: 'warning',
+    //       duration: 0,
+    //     });
+    //     setTimeout(() => {
+    //       $Toast.hide();
+    //     }, 300);
+    //   } else {
+    //     that.setData({
+    //       value1: res[0].username
+    //     })
+    //   }
+    // })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
@@ -184,17 +185,5 @@ Page({
     wx.navigateTo({
       url: '../signup/signup',
     })
-  },
-
-  /**
-   * 监听反馈输入框值改动
-   */
-  handleValueChange(e) {
-    console.log("test")
-    if (e.currentTarget.id == "value1") {
-      this.data.value1 = e.detail.detail.value
-    } else if (e.currentTarget.id == "value2") {
-      this.data.value2 = e.detail.detail.value
-    }
   }
 })
