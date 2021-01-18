@@ -68,7 +68,7 @@
 <i-divider content="最新职位" style="position:relative; top:150rpx;"></i-divider>
 <i-row>
   <i-col span="24">
-    <jobs showlist="{{showlist}}" style="position:relative; top:140rpx;" bindtap="handleMore" />
+    <jobs showlist="{{showlist}}" style="position:relative; top:140rpx;" bind:myTap="handleMyTap"/>
   </i-col>
 </i-row>
 

@@ -32,7 +32,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this
     var query = Bmob.Query("zhiwei");
     query.include("company")
@@ -60,35 +60,35 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     var that = this
     var query = Bmob.Query("zhiwei");
     query.include("company")
@@ -117,14 +117,33 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
-
+  onReachBottom: function () {
+    var num1 = this.data.list.length
+    var num2 = this.data.showlist.length
+    var that = this
+    if (num2 < num1) {
+      this.setData({
+        tip: "加载中",
+        loading: true,
+      })
+      this.data.showlist = this.data.showlist.concat(this.data.list.slice(that.data.pos, num1))
+      this.setData({
+        showlist: this.data.showlist,
+        tip: "下拉加载",
+        loading: false,
+      })
+    } else {
+      this.setData({
+        tip: "已无更多",
+        loading: false,
+      })
+    }
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
@@ -248,38 +267,16 @@ Page({
   },
 
   /**
-   * 下拉加载
-   */
-  onReachBottom: function() {
-    var num1 = this.data.list.length
-    var num2 = this.data.showlist.length
-    var that = this
-    if (num2 < num1) {
-      this.setData({
-        tip: "加载中",
-        loading: true,
-      })
-      this.data.showlist = this.data.showlist.concat(this.data.list.slice(that.data.pos, num1))
-      this.setData({
-        showlist: this.data.showlist,
-        tip: "下拉加载",
-        loading: false,
-      })
-    } else {
-      this.setData({
-        tip: "已无更多",
-        loading: false,
-      })
-    }
-  },
-
-  /**
    * 详情
    */
   handleMore() {
-    console.log("test")
+
+  },
+
+  handleMyTap(e) {
+    console.log("触发事件详情：", e);
     wx.navigateTo({
-      url: '/pages/zdetails/zdetails',
-    })
+      url: '/pages/zdetails/zdetails?objectid=' + e.detail.objectid,
+    });
   }
 })
