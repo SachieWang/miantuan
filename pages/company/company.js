@@ -3,9 +3,6 @@ var Bmob = require('../../lib/app.js');
 Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
 
 const app = getApp()
-const {
-  $Toast
-} = require('../../dist/base/index');
 
 Page({
 

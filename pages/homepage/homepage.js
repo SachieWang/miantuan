@@ -23,9 +23,9 @@ Page({
     minedot: true,
     minecount: 0,
     imgUrls: [
-      'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png',
-      'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png',
-      'http://bmob-cdn-23772.b0.upaiyun.com/2019/02/14/164c6a7c407322ce808a8b21627a1101.png'
+      'cloud://dentist-8g4qt0le8268be8b.6465-dentist-8g4qt0le8268be8b-1255457881/miantuan/homepage_swipper/1.png',
+      'cloud://dentist-8g4qt0le8268be8b.6465-dentist-8g4qt0le8268be8b-1255457881/miantuan/homepage_swipper/2.png',
+      'cloud://dentist-8g4qt0le8268be8b.6465-dentist-8g4qt0le8268be8b-1255457881/miantuan/homepage_swipper/3.png'
     ],
   },
 
