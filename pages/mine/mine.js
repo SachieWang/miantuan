@@ -1,6 +1,4 @@
 // pages/mine/mine.js
-var Bmob = require('../../lib/app.js');
-Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
 const {
   $Toast
 } = require('../../dist/base/index');
@@ -28,7 +26,29 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    //查询用户表，判断新老用户
+    wx.Bmob.User.equalTo("username", "==", wx.getStorageSync('openid'));
+    wx.Bmob.User.find().then(res => {
+      console.log(res)
+      if (res.length != 0 && res.openid != undefined) {
+        //老用户直接显示头像和昵称
+        this.setData({
+          userInfo: {
+            nickName: res.nickName,
+            avatarUrl: res.userPic
+          },
+          hasUserInfo: true
+        })
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+    // user.users().then(res => {
+    //   console.log(res)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -60,71 +80,73 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   },
 
   /**
    * 获取用户信息
    */
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     var that = this
     if (!e.detail.userInfo) {
       console.log("获取失败")
       return false
     }
     app.globalData.userInfo = e.detail.userInfo
+
+    wx.Bmob.User.upInfo(e.detail.userInfo)
     // 存储用户基本信息
     var status = wx.getStorageSync('status') || {}
     status = app.globalData
     wx.setStorageSync('status', status)
-    //获取openid
-    var code = wx.getStorageSync('status').code
-    Bmob.User.requestOpenId(code).then(value => {
-      wx.setStorageSync('openid', value.openid)
-    })
+    // //获取openid
+    // var code = wx.getStorageSync('status').code
+    // Bmob.User.requestOpenId(code).then(value => {
+    //   wx.setStorageSync('openid', value.openid)
+    // })
     $Toast({
       content: '登陆中',
       type: 'loading',
@@ -133,7 +155,7 @@ Page({
     setTimeout(() => {
       //判断是否为系统新用户
       var openid = wx.getStorageSync('openid')
-      var query = Bmob.Query("individual")
+      var query = wx.Bmob.Query("individual")
       query.equalTo("openid", "==", openid)
       query.find().then(res => {
         if (res.length == 0) {

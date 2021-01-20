@@ -1,6 +1,4 @@
 // pages/main/main.js
-var Bmob = require('../../lib/app.js');
-Bmob.initialize("306985f4142230ae3693817dea9a51ff", "86fd59adfde1752a45188179f7dbfd71");
 
 const app = getApp()
 const {
@@ -34,7 +32,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    var query = Bmob.Query("zhiwei");
+    var query = wx.Bmob.Query("zhiwei");
     query.include("company")
     query.find().then(res => {
       //console.log(res)
@@ -90,7 +88,7 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this
-    var query = Bmob.Query("zhiwei");
+    var query = wx.Bmob.Query("zhiwei");
     query.include("company")
     query.find().then(res => {
       //console.log(res)
@@ -186,7 +184,7 @@ Page({
    */
   handleZczx() {
     console.log("zczx")
-    var query = Bmob.Query("zhiwei");
+    var query = wx.Bmob.Query("zhiwei");
     query.include("company")
     query.find().then(res => {
       console.log(res)
